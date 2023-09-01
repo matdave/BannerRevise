@@ -1,0 +1,158 @@
+{
+  "name": "BannerRevised",
+  "lowCaseName": "bannerrevised",
+  "description": "BannerRevised - manage ads",
+  "author": "matdave",
+  "version": "0.0.1-pl",
+  "package": {
+    "menus": [
+      {
+        "text": "bannerrevised",
+        "description": "bannerrevised.desc",
+        "action": "home"
+      }
+    ],
+    "plugins": [
+      {
+        "name": "BannerRevisedClickout",
+        "file": "plugin.bannerrevisedclickout.php",
+        "events": [
+          {
+            "event": "OnPageNotFound",
+            "priority": 0
+          }
+        ]
+      }
+    ],
+    "snippets": [
+      {
+        "name": "BannerRevised",
+        "file": "snippet.bannerrevised.php",
+        "description": "bannerrevised.snippet.desc",
+        "properties": [
+          {
+            "name": "positions"
+          },{
+            "name": "showLog",
+            "type": "combo-boolean",
+            "value": 0
+          },{
+            "name": "fastMode",
+            "type": "combo-boolean",
+            "value": 0
+          },{
+            "name": "limit",
+            "type": "numberfield",
+            "value": 5
+          },{
+            "name": "offset",
+            "type": "numberfield",
+            "value": 0
+          },{
+            "name": "sortby",
+            "type": "list",
+            "options": [
+              {
+                "text": "Random",
+                "value": "RAND()"
+              },
+              {
+                "text": "Index",
+                "value": "idx"
+              },
+              {
+                "text": "Name",
+                "value": "name"
+              },
+              {
+                "text": "Url",
+                "value": "url"
+              },
+              {
+                "text": "Image",
+                "value": "image"
+              },
+              {
+                "text": "Active",
+                "value": "active"
+              },
+              {
+                "text": "Description",
+                "value": "description"
+              }
+            ],
+            "value": "RAND()"
+          },{
+            "name": "sortdir",
+            "type": "list",
+            "options": [
+              {
+                "text": "Ascending",
+                "value": "ASC"
+              },
+              {
+                "text": "Descending",
+                "value": "DESC"
+              }
+            ],
+            "value": "ASC"
+          },{
+            "name": "outputSeparator",
+            "value": "\n"
+          },{
+            "name": "where"
+          },{
+            "name": "showInactive",
+            "type": "combo-boolean",
+            "value": 0
+          },{
+            "name": "tpl",
+            "value": "brevAd"
+          },{
+            "name": "tplFirst"
+          },{
+            "name": "tplLast"
+          },{
+            "name": "tplOdd"
+          },{
+            "name": "tplWrapper"
+          },{
+            "name": "wrapIfEmpty",
+            "type": "combo-boolean",
+            "value": 0
+          },{
+            "name": "toPlaceholder"
+          },{
+            "name": "toSeparatePlaceholders"
+          }
+        ]
+      }
+    ],
+    "systemSettings": [
+      {
+        "key": "click",
+        "area": "main",
+        "value": "bannerclick"
+      },
+      {
+        "key": "media_source",
+        "area": "main",
+        "value": 1,
+        "type": "modx-combo-source"
+      }
+    ]
+  },
+  "database": {
+    "tables": [
+      "brevAd",
+      "brevPosition",
+      "brevAdPosition",
+      "brevClick"
+    ]
+  },
+  "build": {
+    "license": "license.txt",
+    "changelog": "changelog.txt",
+    "readme": "readme.txt"
+  }
+}

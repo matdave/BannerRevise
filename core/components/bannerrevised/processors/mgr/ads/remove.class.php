@@ -1,8 +1,6 @@
 <?php
-class AdRemoveProcessor extends modObjectRemoveProcessor
-{
-    public $classKey = 'brevAd';
-    public $languageTopics = array('bannerrevised:default');
-    public $objectType = 'bannerrevised.ad';
-}
-return 'AdRemoveProcessor';
+
+use BannerRevised\v2\Processors\Ads\Remove;
+
+require_once dirname(__FILE__, 4) . '/vendor/autoload.php';
+return Remove::class;

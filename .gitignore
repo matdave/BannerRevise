@@ -1,2 +1,14 @@
+# MODX-related files #
+######################
+config.core.php
+
+# Build-related files for distribution #
+########################################
+_packages
+vendor
+
+# Development-related files #
 .idea
-core/packages/
+.vscode
+deploy*.sh
+/.php-cs-fixer.cache

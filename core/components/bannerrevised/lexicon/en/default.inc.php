@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Default English Lexicon Entries for BannerRevised
  *
  * @package    bannerrevised
  * @subpackage lexicon
  */
+
 $_lang['bannerrevised'] = 'BannerRevised';
 $_lang['bannerrevised.desc'] = 'BannerRevised - manage ads';
 

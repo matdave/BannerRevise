@@ -1,27 +1,6 @@
 <?php
-class PositionGetListProcessor extends modObjectGetListProcessor
-{
-    public $classKey = 'brevPosition';
-    public $languageTopics = array('bannerrevised:default');
-    public $defaultSortField = 'id';
-    public $defaultSortDirection = 'ASC';
-    public $objectType = 'bannerrevised.position';
 
-    function prepareQueryBeforeCount(xPDOQuery $c)
-    {
-        // Filter by search query
-        if ($query = $this->getProperty('query')) {
-            $c->where(array('name:LIKE' => "%$query%"));
-        }
+use BannerRevised\v2\Processors\Positions\GetList;
 
-        return $c;
-    }
-
-    function prepareRow(xPDOObject $object)
-    {
-        $object = $object->toArray();
-        $object['clicks'] = $this->modx->getCount('brevClick', array('position' => $object['id']));
-        return $object;
-    }
-}
-return 'PositionGetListProcessor';
+require_once dirname(__FILE__, 4) . '/vendor/autoload.php';
+return GetList::class;

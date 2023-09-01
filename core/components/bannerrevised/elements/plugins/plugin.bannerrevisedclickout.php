@@ -1,7 +1,8 @@
 <?php
+
 if ($modx->event->name == 'OnPageNotFound') {
     $bannerrevised_click = $modx->getOption('bannerrevised_click', null, 'bannerclick', true);
-    if (preg_match('/'.$bannerrevised_click.'\/([0-9]+)/', $_SERVER['REQUEST_URI'], $matches)) {
+    if (preg_match('/' . $bannerrevised_click . '\/([0-9]+)/', $_SERVER['REQUEST_URI'], $matches)) {
         $modx->addPackage('bannerrevised', $modx->getOption('core_path') . 'components/bannerrevised/model/');
 
         $id = $matches[1];
@@ -18,7 +19,8 @@ if ($modx->event->name == 'OnPageNotFound') {
             );
             if (!$modx->getCount('byClick', $key)) {
                 $click = $modx->newObject(
-                    'byClick', array(
+                    'byClick',
+                    array(
                     'ad' => $ad->get('id'),
                     'position' => $ad->get('position'),
                     'clickdate' => date('Y-m-d H:i:s'),

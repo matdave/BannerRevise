@@ -1,24 +1,26 @@
 <?php
+
 /**
  * @package bannerrevised
  */
-$xpdo_meta_map['brevAdPosition']= array (
+
+$xpdo_meta_map['brevAdPosition'] = array (
   'package' => 'bannerrevised',
   'version' => '0.1',
   'table' => 'ban_rev_ads_positions',
-  'tableMeta' => 
+  'tableMeta' =>
   array (
     'engine' => 'InnoDB',
   ),
-  'fields' => 
+  'fields' =>
   array (
-    'ad' => NULL,
-    'position' => NULL,
+    'ad' => null,
+    'position' => null,
     'idx' => 0,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'ad' => 
+    'ad' =>
     array (
       'dbtype' => 'integer',
       'precision' => '10',
@@ -27,7 +29,7 @@ $xpdo_meta_map['brevAdPosition']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'position' => 
+    'position' =>
     array (
       'dbtype' => 'integer',
       'precision' => '10',
@@ -36,7 +38,7 @@ $xpdo_meta_map['brevAdPosition']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'idx' => 
+    'idx' =>
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -45,17 +47,17 @@ $xpdo_meta_map['brevAdPosition']= array (
       'default' => 0,
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'ad' => 
+    'ad' =>
     array (
       'alias' => 'ad',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'ad' => 
+        'ad' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -63,15 +65,15 @@ $xpdo_meta_map['brevAdPosition']= array (
         ),
       ),
     ),
-    'position' => 
+    'position' =>
     array (
       'alias' => 'position',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'position' => 
+        'position' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -80,9 +82,9 @@ $xpdo_meta_map['brevAdPosition']= array (
       ),
     ),
   ),
-  'aggregates' => 
+  'aggregates' =>
   array (
-    'Ad' => 
+    'Ad' =>
     array (
       'class' => 'brevAd',
       'local' => 'ad',
@@ -90,7 +92,7 @@ $xpdo_meta_map['brevAdPosition']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'Position' => 
+    'Position' =>
     array (
       'class' => 'brevPosition',
       'local' => 'position',

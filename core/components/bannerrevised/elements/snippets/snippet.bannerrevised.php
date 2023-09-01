@@ -1,28 +1,32 @@
 <?php
+
 /**
- * 
  *
- * @var array $scriptProperties 
+ *
+ * @var array $scriptProperties
  */
 /* @var pdoFetch $pdoFetch */
-if (!$modx->getService('pdoFetch')) {return 'You need to install pdoTools to use this snippet!';
+if (!$modx->getService('pdoFetch')) {
+    return 'You need to install pdoTools to use this snippet!';
 }
 $pdoFetch = new pdoFetch($modx, $scriptProperties);
 $pdoFetch->addTime('pdoTools loaded');
 $modx->lexicon->load('bannerrevised:default');
 $modx->addPackage('bannerrevised', MODX_CORE_PATH . 'components/bannerrevised/model/');
 
-if (!empty($tplOuter)) {$tplWrapper = $tplOuter;
+if (!empty($tplOuter)) {
+    $tplWrapper = $tplOuter;
 }
-if (empty($outputSeparator)) {$outputSeparator = "\n";
+if (empty($outputSeparator)) {
+    $outputSeparator = "\n";
 }
 $class = 'byAd';
 
 // Adding extra parameters into special place so we can put them in results
 /**
-* 
+*
  *
- * @var modSnippet $snippet 
+ * @var modSnippet $snippet
 */
 $additionalPlaceholders = array();
 if ($snippet = $modx->getObject('modSnippet', array('name' => 'BannerRevised'))) {
@@ -40,29 +44,26 @@ $where = array(
     "({$class}.start IS NULL OR {$class}.start <= '{$date}') AND ({$class}.end IS NULL OR {$class}.end >= '{$date}')"
 );
 if (empty($showInactive)) {
-    $where[$class.'.active'] = 1;
+    $where[$class . '.active'] = 1;
 }
 if (!empty($position)) {
     $where['byAdPosition.position'] = $position;
-}
-elseif (!empty($positions)) {
+} elseif (!empty($positions)) {
     $where['byAdPosition.position:IN'] = array_map('trim', explode(',', $positions));
 }
 
 if (empty($sortby)) {
     $sortby = 'RAND()';
-}
-elseif ($sortby == 'idx' || $sortby == 'index') {
+} elseif ($sortby == 'idx' || $sortby == 'index') {
     $sortby = 'byAdPosition.idx';
-}
-else {
-    $sortby = $class.'.'.$sortby;
+} else {
+    $sortby = $class . '.' . $sortby;
 }
 
 $innerJoin = array(
     'byAdPosition' => array(
         'alias' => 'byAdPosition',
-        'on' => $class.'.id = byAdPosition.ad'
+        'on' => $class . '.id = byAdPosition.ad'
     )
 );
 
@@ -107,16 +108,15 @@ foreach ($rows as $row) {
 
     if (!isset($sources[$row['source']])) {
         /**
-* 
+*
          *
-    * @var modMediaSource $source 
+    * @var modMediaSource $source
 */
         if ($source = $modx->getObject('sources.modMediaSource', $source)) {
             $source->initialize($modx->context->key);
         }
         $sources[$row['source']] = $source;
-    }
-    else {
+    } else {
         $source = $sources[$row['source']];
     }
 
@@ -132,7 +132,7 @@ foreach ($rows as $row) {
 
     $output[] = !empty($tpl)
     ? $pdoFetch->getChunk($tpl, $row, $pdoFetch->config['fastMode'])
-    : '<pre>'.$pdoFetch->getChunk('', $row).'</pre>';
+    : '<pre>' . $pdoFetch->getChunk('', $row) . '</pre>';
 }
 
 if ($modx->user->hasSessionContext('mgr') && !empty($showLog)) {
@@ -142,8 +142,7 @@ if ($modx->user->hasSessionContext('mgr') && !empty($showLog)) {
 // Return output
 if (!empty($toSeparatePlaceholders)) {
     $modx->setPlaceholders($output, $toSeparatePlaceholders);
-}
-else {
+} else {
     $output = implode($outputSeparator, $output);
 
     if (!empty($tplWrapper) && (!empty($wrapIfEmpty) || !empty($output))) {
@@ -152,8 +151,7 @@ else {
 
     if (!empty($toPlaceholder)) {
         $modx->setPlaceholder($toPlaceholder, $output);
-    }
-    else {
+    } else {
         return $output;
     }
 }

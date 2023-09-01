@@ -1,18 +1,19 @@
 <?php
+
 /**
  * @package bannerrevised
  */
 class BannerRevised
 {
     /**
-     * @var \modX $modx 
+     * @var \modX $modx
      */
     public $modx;
 
     public $namespace = 'bannerrevised';
 
     /**
-     * @var array $config 
+     * @var array $config
      */
     public $config = [];
     /**
@@ -21,7 +22,7 @@ class BannerRevised
      * @param modX  &$modx  A reference to the modX object
      * @param array $config An array of configuration options
      */
-    function __construct(modX &$modx, array $config = array())
+    public function __construct(modX &$modx, array $config = array())
     {
         $this->modx =& $modx;
 
@@ -41,14 +42,14 @@ class BannerRevised
             'baseUrl' => $modx->getOption('base_url'),
             'basePath' => $basePath,
             'corePath' => $basePath,
-            'modelPath' => $basePath.'model/',
-            'processorsPath' => $basePath.'processors/',
-            'templatesPath' => $basePath.'templates/',
-            'chunksPath' => $basePath.'elements/chunks/',
-            'jsUrl' => $assetsUrl.'js/',
-            'cssUrl' => $assetsUrl.'css/',
+            'modelPath' => $basePath . 'model/',
+            'processorsPath' => $basePath . 'processors/',
+            'templatesPath' => $basePath . 'templates/',
+            'chunksPath' => $basePath . 'elements/chunks/',
+            'jsUrl' => $assetsUrl . 'js/',
+            'cssUrl' => $assetsUrl . 'css/',
             'assetsUrl' => $assetsUrl,
-            'connectorUrl' => $assetsUrl.'connector.php',
+            'connectorUrl' => $assetsUrl . 'connector.php',
             'managerUrl' => $this->modx->getOption('manager_url'),
             'media_source' => $this->modx->getOption(
                 'bannerrevised.media_source',
@@ -62,6 +63,7 @@ class BannerRevised
 
         $this->modx->addPackage('bannerrevised', $this->getOption('modelPath'));
         $this->modx->lexicon->load('bannerrevised:default');
+        $this->autoload();
     }
 
 
@@ -90,18 +92,23 @@ class BannerRevised
         return $option;
     }
 
+    protected function autoload()
+    {
+        include_once $this->getOption('basePath') . 'vendor/autoload.php';
+    }
+
 
     /**
      * Refreshes order of ads in position after various actions with them
      *
      * @param integer $position An id of position
      */
-    function refreshIdx($position = 0)
+    public function refreshIdx($position = 0)
     {
         $q = $this->modx->newQuery('brevAdPosition');
         $q ->where(array('position' => $position));
         $q->sortby('idx', 'ASC');
-        
+
         $res = $this->modx->getCollection('brevAdPosition', $q);
         $i = 0;
         foreach ($res as $v) {

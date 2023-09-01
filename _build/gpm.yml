@@ -1,0 +1,103 @@
+name: BannerRevised
+version: 0.0.1-pl
+lowCaseName: bannerrevised
+namespace: BannerRevised
+description: "BannerRevised - manage ads"
+author: matdave
+menus:
+    - text: bannerrevised
+      description: bannerrevised.desc
+      action: home
+chunks:
+    - name: brevAd
+      file: chunk.brevad.tpl
+      properties:
+          - name: bannerrevised_click
+          - name: adposition
+          - name: image
+          - name: name
+          - name: description
+plugins:
+    - name: BannerRevisedClickout
+      file: plugin.bannerrevisedclickout.php
+      events:
+          - OnPageNotFound
+snippets:
+    - name: BannerRevised
+      file: snippet.bannerrevised.php
+      description: bannerrevised.snippet.desc
+      properties:
+          - name: positions
+          - name: showLog
+            type: combo-boolean
+            value: "0"
+          - name: fastMode
+            type: combo-boolean
+            value: "0"
+          - name: limit
+            type: numberfield
+            value: "5"
+          - name: offset
+            type: numberfield
+            value: "0"
+          - name: sortby
+            type: list
+            options:
+                - text: Random
+                  value: RAND()
+                - text: Index
+                  value: idx
+                - text: Name
+                  value: name
+                - text: Url
+                  value: url
+                - text: Image
+                  value: image
+                - text: Active
+                  value: active
+                - text: Description
+                  value: description
+            value: "RAND()"
+          - name: sortdir
+            type: list
+            options:
+                - text: Ascending
+                  value: ASC
+                - text: Descending
+                  value: DESC
+            value: "ASC"
+          - name: outputSeparator
+            value: "\n"
+          - name: where
+          - name: showInactive
+            type: combo-boolean
+            value: "0"
+          - name: tpl
+            value: "brevAd"
+          - name: tplFirst
+          - name: tplLast
+          - name: tplOdd
+          - name: tplWrapper
+          - name: wrapIfEmpty
+            type: combo-boolean
+            value: "0"
+          - name: toPlaceholder
+          - name: toSeparatePlaceholders
+systemSettings:
+    - key: click
+      area: main
+      value: bannerclick
+    - key: media_source
+      area: main
+      value: 1
+      type: modx-combo-source
+database:
+    tables:
+        - BannerRevised\Model\Ad
+        - BannerRevised\Model\Position
+        - BannerRevised\Model\AdPosition
+        - BannerRevised\Model\Click
+build:
+    license: core/components/bannerrevised/docs/license.txt
+    changelog: core/components/bannerrevised/docs/changelog.txt
+    readme: core/components/bannerrevised/docs/readme.txt

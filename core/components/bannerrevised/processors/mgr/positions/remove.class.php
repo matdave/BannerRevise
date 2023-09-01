@@ -1,8 +1,6 @@
 <?php
-class PositionRemoveProcessor extends modObjectRemoveProcessor
-{
-    public $classKey = 'brevPosition';
-    public $languageTopics = array('bannerrevised:default');
-    public $objectType = 'bannerrevised.position';
-}
-return 'PositionRemoveProcessor';
+
+use BannerRevised\v2\Processors\Positions\Remove;
+
+require_once dirname(__FILE__, 4) . '/vendor/autoload.php';
+return Remove::class;

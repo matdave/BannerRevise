@@ -1,8 +1,7 @@
 <?php
+
 class brevAd extends xPDOSimpleObject
 {
-
-
     public function getImageUrl($image = '')
     {
         if (empty($image)) {

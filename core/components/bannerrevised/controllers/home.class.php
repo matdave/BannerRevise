@@ -2,11 +2,10 @@
 
 class BannerRevisedHomeManagerController extends modExtraManagerController
 {
-
     /**
-     * 
      *
-     * @var BannerRevised $bannerrevised 
+     *
+     * @var BannerRevised $bannerrevised
      */
     public $bannerrevised;
 

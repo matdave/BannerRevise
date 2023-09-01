@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Properties English Lexicon Entries for BannerRevised
  *
  * @package    bannerrevised
  * @subpackage lexicon
  */
+
 $_lang['bannerrevised_prop_positions'] = 'Comma separated list of ads positions.';
 
 $_lang['bannerrevised_prop_limit'] = 'If set to non-zero, will only show X number of items.';

@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Properties Russian Lexicon Entries for BannerRevised
  *
  * @package    bannerrevised
  * @subpackage lexicon
  */
+
 $_lang['bannerrevised_prop_positions'] = 'Номера рекламных позиций для вывода баннеров, через запятую.';
 
 $_lang['bannerrevised_prop_limit'] = 'Ограничение выборки.';

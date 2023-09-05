@@ -45,8 +45,8 @@
 			<column key="position" length="" collation="A" null="false" />
 		</index>
 
-		<aggregate alias="Ad" class="Ad" local="ad" foreign="id" cardinality="one" owner="foreign" />
-		<aggregate alias="Position" class="Position" local="position" foreign="id" cardinality="one" owner="foreign" />
+		<aggregate alias="Ad" class="BannerRevised\Model\Ad" local="ad" foreign="id" cardinality="one" owner="foreign" />
+		<aggregate alias="Position" class="BannerRevised\Model\Position" local="position" foreign="id" cardinality="one" owner="foreign" />
 	</object>
 	<object class="Click" table="ban_rev_clicks">
 		<field key="ad" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" index="index" />

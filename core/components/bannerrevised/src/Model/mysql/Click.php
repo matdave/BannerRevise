@@ -1,30 +1,30 @@
 <?php
-
 namespace BannerRevised\Model\mysql;
 
 use xPDO\xPDO;
 
 class Click extends \BannerRevised\Model\Click
 {
+
     public static $metaMap = array (
         'package' => 'BannerRevised\\Model\\',
         'version' => '3.0',
         'table' => 'ban_rev_clicks',
-        'tableMeta' =>
+        'tableMeta' => 
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' =>
+        'fields' => 
         array (
-            'ad' => null,
-            'position' => null,
-            'clickdate' => null,
-            'referrer' => null,
-            'ip' => null,
+            'ad' => NULL,
+            'position' => NULL,
+            'clickdate' => NULL,
+            'referrer' => NULL,
+            'ip' => NULL,
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'ad' =>
+            'ad' => 
             array (
                 'dbtype' => 'integer',
                 'precision' => '10',
@@ -33,7 +33,7 @@ class Click extends \BannerRevised\Model\Click
                 'null' => false,
                 'index' => 'index',
             ),
-            'position' =>
+            'position' => 
             array (
                 'dbtype' => 'integer',
                 'precision' => '10',
@@ -42,20 +42,20 @@ class Click extends \BannerRevised\Model\Click
                 'null' => false,
                 'index' => 'index',
             ),
-            'clickdate' =>
+            'clickdate' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => true,
             ),
-            'referrer' =>
+            'referrer' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
             ),
-            'ip' =>
+            'ip' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '39',
@@ -63,9 +63,9 @@ class Click extends \BannerRevised\Model\Click
                 'null' => false,
             ),
         ),
-        'aggregates' =>
+        'aggregates' => 
         array (
-            'Ad' =>
+            'Ad' => 
             array (
                 'class' => 'Ad',
                 'local' => 'ad',
@@ -73,7 +73,7 @@ class Click extends \BannerRevised\Model\Click
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Position' =>
+            'Position' => 
             array (
                 'class' => 'BannerRevised\\Model\\Position',
                 'local' => 'position',
@@ -83,4 +83,5 @@ class Click extends \BannerRevised\Model\Click
             ),
         ),
     );
+
 }

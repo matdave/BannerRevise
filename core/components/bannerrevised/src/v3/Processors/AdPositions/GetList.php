@@ -39,6 +39,9 @@ class GetList extends GetListProcessor
          */
         $ad = $object->getOne('Ad');
 
+        if (!$ad) {
+            return $object->toArray();
+        }
         $row = array_merge($ad->toArray(), $object->toArray());
         $row['image'] = $ad->getImageUrl();
 

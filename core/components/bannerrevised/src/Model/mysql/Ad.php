@@ -1,33 +1,33 @@
 <?php
-
 namespace BannerRevised\Model\mysql;
 
 use xPDO\xPDO;
 
 class Ad extends \BannerRevised\Model\Ad
 {
+
     public static $metaMap = array (
         'package' => 'BannerRevised\\Model\\',
         'version' => '3.0',
         'table' => 'ban_rev_ads',
-        'tableMeta' =>
+        'tableMeta' => 
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' =>
+        'fields' => 
         array (
             'name' => '',
             'url' => '',
             'image' => '',
             'source' => 1,
             'active' => 0,
-            'description' => null,
-            'start' => null,
-            'end' => null,
+            'description' => NULL,
+            'start' => NULL,
+            'end' => NULL,
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'name' =>
+            'name' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
@@ -35,7 +35,7 @@ class Ad extends \BannerRevised\Model\Ad
                 'null' => false,
                 'default' => '',
             ),
-            'url' =>
+            'url' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
@@ -43,7 +43,7 @@ class Ad extends \BannerRevised\Model\Ad
                 'null' => true,
                 'default' => '',
             ),
-            'image' =>
+            'image' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
@@ -51,7 +51,7 @@ class Ad extends \BannerRevised\Model\Ad
                 'null' => true,
                 'default' => '',
             ),
-            'source' =>
+            'source' => 
             array (
                 'dbtype' => 'integer',
                 'precision' => '10',
@@ -60,7 +60,7 @@ class Ad extends \BannerRevised\Model\Ad
                 'null' => true,
                 'default' => 1,
             ),
-            'active' =>
+            'active' => 
             array (
                 'dbtype' => 'tinyint',
                 'precision' => '1',
@@ -69,36 +69,36 @@ class Ad extends \BannerRevised\Model\Ad
                 'null' => false,
                 'default' => 0,
             ),
-            'description' =>
+            'description' => 
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'null' => true,
             ),
-            'start' =>
+            'start' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'timestamp',
                 'null' => true,
             ),
-            'end' =>
+            'end' => 
             array (
                 'dbtype' => 'datetime',
                 'phptype' => 'timestamp',
                 'null' => true,
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'active' =>
+            'active' => 
             array (
                 'alias' => 'active',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'active' =>
+                    'active' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -106,15 +106,15 @@ class Ad extends \BannerRevised\Model\Ad
                     ),
                 ),
             ),
-            'start' =>
+            'start' => 
             array (
                 'alias' => 'start',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'start' =>
+                    'start' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -122,15 +122,15 @@ class Ad extends \BannerRevised\Model\Ad
                     ),
                 ),
             ),
-            'end' =>
+            'end' => 
             array (
                 'alias' => 'end',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'end' =>
+                    'end' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -139,9 +139,9 @@ class Ad extends \BannerRevised\Model\Ad
                 ),
             ),
         ),
-        'composites' =>
+        'composites' => 
         array (
-            'Positions' =>
+            'Positions' => 
             array (
                 'class' => 'BannerRevised\\Model\\AdPosition',
                 'local' => 'id',
@@ -149,7 +149,7 @@ class Ad extends \BannerRevised\Model\Ad
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Clicks' =>
+            'Clicks' => 
             array (
                 'class' => 'BannerRevised\\Model\\Click',
                 'local' => 'id',
@@ -159,4 +159,5 @@ class Ad extends \BannerRevised\Model\Ad
             ),
         ),
     );
+
 }

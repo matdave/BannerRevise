@@ -1,28 +1,28 @@
 <?php
-
 namespace BannerRevised\Model\mysql;
 
 use xPDO\xPDO;
 
 class AdPosition extends \BannerRevised\Model\AdPosition
 {
+
     public static $metaMap = array (
         'package' => 'BannerRevised\\Model\\',
         'version' => '3.0',
         'table' => 'ban_rev_ads_positions',
-        'tableMeta' =>
+        'tableMeta' => 
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' =>
+        'fields' => 
         array (
-            'ad' => null,
-            'position' => null,
+            'ad' => NULL,
+            'position' => NULL,
             'idx' => 0,
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'ad' =>
+            'ad' => 
             array (
                 'dbtype' => 'integer',
                 'precision' => '10',
@@ -31,7 +31,7 @@ class AdPosition extends \BannerRevised\Model\AdPosition
                 'null' => false,
                 'index' => 'index',
             ),
-            'position' =>
+            'position' => 
             array (
                 'dbtype' => 'integer',
                 'precision' => '10',
@@ -40,7 +40,7 @@ class AdPosition extends \BannerRevised\Model\AdPosition
                 'null' => false,
                 'index' => 'index',
             ),
-            'idx' =>
+            'idx' => 
             array (
                 'dbtype' => 'int',
                 'precision' => '10',
@@ -49,17 +49,17 @@ class AdPosition extends \BannerRevised\Model\AdPosition
                 'default' => 0,
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'ad' =>
+            'ad' => 
             array (
                 'alias' => 'ad',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'ad' =>
+                    'ad' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -67,15 +67,15 @@ class AdPosition extends \BannerRevised\Model\AdPosition
                     ),
                 ),
             ),
-            'position' =>
+            'position' => 
             array (
                 'alias' => 'position',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'position' =>
+                    'position' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -84,19 +84,19 @@ class AdPosition extends \BannerRevised\Model\AdPosition
                 ),
             ),
         ),
-        'aggregates' =>
+        'aggregates' => 
         array (
-            'Ad' =>
+            'Ad' => 
             array (
-                'class' => 'Ad',
+                'class' => 'BannerRevised\\Model\\Ad',
                 'local' => 'ad',
                 'foreign' => 'id',
                 'cardinality' => 'one',
                 'owner' => 'foreign',
             ),
-            'Position' =>
+            'Position' => 
             array (
-                'class' => 'Position',
+                'class' => 'BannerRevised\\Model\\Position',
                 'local' => 'position',
                 'foreign' => 'id',
                 'cardinality' => 'one',
@@ -104,4 +104,5 @@ class AdPosition extends \BannerRevised\Model\AdPosition
             ),
         ),
     );
+
 }

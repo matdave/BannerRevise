@@ -1,26 +1,26 @@
 <?php
-
 namespace BannerRevised\Model\mysql;
 
 use xPDO\xPDO;
 
 class Position extends \BannerRevised\Model\Position
 {
+
     public static $metaMap = array (
         'package' => 'BannerRevised\\Model\\',
         'version' => '3.0',
         'table' => 'ban_rev_positions',
-        'tableMeta' =>
+        'tableMeta' => 
         array (
             'engine' => 'InnoDB',
         ),
-        'fields' =>
+        'fields' => 
         array (
             'name' => '',
         ),
-        'fieldMeta' =>
+        'fieldMeta' => 
         array (
-            'name' =>
+            'name' => 
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
@@ -29,17 +29,17 @@ class Position extends \BannerRevised\Model\Position
                 'default' => '',
             ),
         ),
-        'indexes' =>
+        'indexes' => 
         array (
-            'name' =>
+            'name' => 
             array (
                 'alias' => 'name',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' =>
+                'columns' => 
                 array (
-                    'name' =>
+                    'name' => 
                     array (
                         'length' => '',
                         'collation' => 'A',
@@ -48,9 +48,9 @@ class Position extends \BannerRevised\Model\Position
                 ),
             ),
         ),
-        'composites' =>
+        'composites' => 
         array (
-            'Ads' =>
+            'Ads' => 
             array (
                 'class' => 'BannerRevised\\Model\\AdPosition',
                 'local' => 'id',
@@ -58,7 +58,7 @@ class Position extends \BannerRevised\Model\Position
                 'cardinality' => 'many',
                 'owner' => 'local',
             ),
-            'Clicks' =>
+            'Clicks' => 
             array (
                 'class' => 'BannerRevised\\Model\\Click',
                 'local' => 'id',
@@ -68,4 +68,5 @@ class Position extends \BannerRevised\Model\Position
             ),
         ),
     );
+
 }

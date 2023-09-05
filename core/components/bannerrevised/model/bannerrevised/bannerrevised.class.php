@@ -49,7 +49,7 @@ class BannerRevised
             'jsUrl' => $assetsUrl . 'js/',
             'cssUrl' => $assetsUrl . 'css/',
             'assetsUrl' => $assetsUrl,
-            'connectorUrl' => $assetsUrl . 'connector.php',
+            'connector_url' => $assetsUrl . 'connector.php',
             'managerUrl' => $this->modx->getOption('manager_url'),
             'media_source' => $this->modx->getOption(
                 'bannerrevised.media_source',

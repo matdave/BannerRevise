@@ -4,7 +4,7 @@ Ext.onReady(
     }
 );
 
-BannerRev.page.Home = function (config) {
+bannerrev.page.Home = function (config) {
     config = config || {};
     Ext.applyIf(
         config,{
@@ -14,7 +14,7 @@ BannerRev.page.Home = function (config) {
             }]
         }
     );
-    BannerRev.page.Home.superclass.constructor.call(this,config);
+    bannerrev.page.Home.superclass.constructor.call(this,config);
 };
-Ext.extend(BannerRev.page.Home,MODx.Component);
-Ext.reg('bannerrevised-page-home',BannerRev.page.Home);
+Ext.extend(bannerrev.page.Home,MODx.Component);
+Ext.reg('bannerrevised-page-home',bannerrev.page.Home);

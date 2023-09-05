@@ -1,12 +1,18 @@
 <?php
 
-class AdUpdateProcessor extends modObjectUpdateProcessor
+namespace BannerRevised\v3\Processors\Ads;
+
+use BannerRevised\Model\Ad;
+use BannerRevised\Model\AdPosition;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
+
+class Update extends UpdateProcessor
 {
-    public $classKey = 'brevAd';
+    public $classKey = Ad::class;
     public $languageTopics = array('bannerrevised:default');
     public $objectType = 'bannerrevised.ad';
 
-    function beforeSet()
+    public function beforeSet()
     {
         if (!$this->getProperty('start')) {
             $this->setProperty('start', null);
@@ -18,17 +24,17 @@ class AdUpdateProcessor extends modObjectUpdateProcessor
         return parent::beforeSet();
     }
 
-    function afterSave()
+    public function afterSave()
     {
         $positions = $this->getProperty('positions');
         $ad = $this->object->get('id');
 
         if (is_array($positions)) {
             //remove unused current positions
-            $q = $this->modx->newQuery('brevAdPosition', array('position:NOT IN' => $positions, 'ad' => $ad));
-            $adpositions = $this->modx->getCollection('brevAdPosition', $q);
+            $q = $this->modx->newQuery(AdPosition::class, array('position:NOT IN' => $positions, 'ad' => $ad));
+            $adpositions = $this->modx->getCollection(AdPosition::class, $q);
             /**
-             * @var brevAdPosition $adposition
+             * @var AdPosition $adposition
              */
             foreach ($adpositions as $adposition) {
                 $position = $adposition->get('position');
@@ -39,18 +45,16 @@ class AdUpdateProcessor extends modObjectUpdateProcessor
             foreach ($positions as $position) {
                 $arr = array('ad' => $ad, 'position' => $position);
 
-                if (!$adPos = $this->modx->getObject('brevAdPosition', $arr)) {
-                    $adPos = $this->modx->newObject('brevAdPosition');
-                    $arr['idx'] = $this->modx->getCount('brevAdPosition', array('position' => $position));
+                if (!$adPos = $this->modx->getObject(AdPosition::class, $arr)) {
+                    $adPos = $this->modx->newObject(AdPosition::class);
+                    $arr['idx'] = $this->modx->getCount(AdPosition::class, array('position' => $position));
                 }
                 $adPos->fromArray($arr);
                 $adPos->save();
             }
         } else {
             //no positions selected, so remove all of them
-            $this->modx->removeCollection('brevAdPosition', array('ad' => $ad));
+            $this->modx->removeCollection(AdPosition::class, array('ad' => $ad));
         }
     }
 }
-
-return 'AdUpdateProcessor';

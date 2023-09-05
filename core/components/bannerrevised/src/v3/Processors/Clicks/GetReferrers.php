@@ -1,8 +1,14 @@
 <?php
 
-class GetReferrersProcessor extends modObjectGetListProcessor
+namespace BannerRevised\v3\Processors\Clicks;
+
+use BannerRevised\Model\Click;
+use MODX\Revolution\Processors\Model\GetListProcessor;
+use PDO;
+
+class GetReferrers extends GetListProcessor
 {
-    public $classKey = 'brevClick';
+    public $classKey = Click::class;
     public $languageTopics = array('bannerrevised:default');
     public $defaultSortField = 'clicks';
     public $defaultSortDirection = 'DESC';
@@ -60,5 +66,3 @@ class GetReferrersProcessor extends modObjectGetListProcessor
         return $list;
     }
 }
-
-return 'GetReferrersProcessor';

@@ -1,10 +1,14 @@
-BannerRev.grid.Positions = function (config) {
+bannerrev.grid.Positions = function (config) {
     config = config || {};
     Ext.applyIf(
         config,{
             id: 'bannerrevised-grid-positions'
-            ,url: BannerRev.config.connectorUrl
-            ,baseParams: { action: 'mgr/positions/getlist' }
+            ,url: bannerrev.config.modx3 ?
+                MODx.config.connector_url :
+                bannerrev.config.connector_url
+            ,baseParams: { action: bannerrev.config.modx3 ?
+                    'BannerRevised\\v3\\Processors\\Positions\\GetList' :
+                    'mgr/positions/getlist' }
             ,fields: ['id','name','clicks']
             ,border: false
             ,remoteSort: true
@@ -26,9 +30,7 @@ BannerRev.grid.Positions = function (config) {
             ,tbar: [{
                 text: _('bannerrevised.positions.new')
                 ,handler: this.createPosition
-            },{
-                xtype: 'tbfill'
-            },{
+            },'->',{
                 xtype: 'bannerrevised-filter-byquery'
                 ,id: 'bannerrevised-positions-filter-byquery'
                 ,listeners: {
@@ -51,10 +53,10 @@ BannerRev.grid.Positions = function (config) {
             }
         }
     );
-    BannerRev.grid.Positions.superclass.constructor.call(this,config)
+    bannerrev.grid.Positions.superclass.constructor.call(this,config)
 };
 Ext.extend(
-    BannerRev.grid.Positions,MODx.grid.Grid,{
+    bannerrev.grid.Positions,MODx.grid.Grid,{
         getMenu: function () {
             var icon = 'x-menu-item-icon icon icon-';
             var m = [{
@@ -90,11 +92,13 @@ Ext.extend(
                     ,listeners: {
                         success:{fn:function () {
                             Ext.getCmp('bannerrevised-grid-positions').store.reload();
-                            BannerRev.posStore.reload();
+                            bannerrev.posStore.reload();
                         },scope:this}
                     }
                     ,baseParams: {
-                        action: 'mgr/positions/create'
+                        action: bannerrev.config.modx3 ?
+                            'BannerRevised\\v3\\Processors\\Positions\\Create' :
+                            'mgr/positions/create'
                     }
                 }
             );
@@ -115,7 +119,7 @@ Ext.extend(
                     ,listeners: {
                         'success':{fn:function () {
                             Ext.getCmp('bannerrevised-grid-positions').store.reload();
-                            BannerRev.posStore.reload();
+                            bannerrev.posStore.reload();
                         },scope:this}
                     }
                 }
@@ -134,13 +138,15 @@ Ext.extend(
                     ,text: _('bannerrevised.positions.remove.confirm')
                     ,url: this.config.url
                     ,params: {
-                        action: 'mgr/positions/remove'
+                        action: bannerrev.config.modx3 ?
+                            'BannerRevised\\v3\\Processors\\Positions\\Remove' :
+                            'mgr/positions/remove'
                         ,id: this.menu.record.id
                     }
                     ,listeners: {
                         'success':{fn:function () {
                             Ext.getCmp('bannerrevised-grid-positions').store.reload();
-                            BannerRev.posStore.reload();
+                            bannerrev.posStore.reload();
                         },scope:this}
                     }
                 }
@@ -148,168 +154,4 @@ Ext.extend(
         }
     }
 );
-Ext.reg('bannerrevised-grid-positions',BannerRev.grid.Positions);
-
-BannerRev.window.Position = function (config) {
-    config = config || {};
-    Ext.applyIf(
-        config,{
-            id: 'bannerrevised-window-position'
-            ,title: _('bannerrevised.positions.new')
-            ,url: BannerRev.config.connectorUrl
-            ,modal: true
-            ,width: 600
-            ,autoHeight: true
-            ,baseParams: {
-                action: 'mgr/positions/update'
-            }
-            ,fields: [{
-                xtype: 'hidden'
-                ,name: 'id'
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('bannerrevised.positions.name')
-                ,name: 'name'
-                ,anchor: '99%'
-                ,allowBlank: false
-            },{
-                xtype: 'bannerrevised-grid-adpositions'
-                ,update: config.update
-                ,position: config.position
-                ,pageSize: 5
-            }
-            ]
-            ,keys: [{key: Ext.EventObject.ENTER,shift: true,fn:  function () {
-                this.submit()},scope: this}]
-        }
-    );
-    BannerRev.window.Position.superclass.constructor.call(this,config);
-};
-Ext.extend(BannerRev.window.Position,MODx.Window);
-Ext.reg('bannerrevised-window-position',BannerRev.window.Position);
-
-
-
-BannerRev.grid.AdPositions = function (config) {
-    config = config || {};
-    Ext.applyIf(
-        config,{
-            id: 'bannerrevised-grid-adpositions'
-            ,url: BannerRev.config.connectorUrl
-            ,baseParams: {
-                action: 'mgr/adpositions/getlist'
-                ,position: config.position || 0
-            }
-            ,fields: ['id','name','idx','image']
-            ,autoHeight: true
-            ,paging: true
-            ,disabled: config.update == 0 ? 1 : 0
-            ,hidden: config.update == 0 ? 1 : 0
-            ,pageSize: config.pageSize || 5
-            ,columns: [
-            {header: _('bannerrevised.adposition.idx'),dataIndex: 'idx',sortable: false, width: 25}
-            ,{header: _('bannerrevised.ads.name'),dataIndex: 'name',sortable: false}
-            ,{header: _('bannerrevised.ads.image'),dataIndex: 'image',sortable: false, width: 50, renderer: {fn:function (img) {
-                return BannerRev.renderGridImage(img)}}, id: 'byad-thumb2'}
-            ]
-            ,plugins: [new Ext.ux.dd.GridDragDropRowOrder(
-                {
-                    listeners: {
-                        'afterrowmove': {
-                            fn: function (drag, old_order, new_order, row) {
-                                   row = row[0];
-                                   var grid = drag.grid;
-                                   var el = Ext.get('bannerrevised-grid-adpositions');
-                                   el.mask(_('loading'),'x-mask-loading')
-                                MODx.Ajax.request(
-                                    {
-                                        url: BannerRev.config.connectorUrl
-                                        ,params: {
-                                            action: 'mgr/adpositions/sort'
-                                                   ,id: row.data.id
-                                                   ,new_order: new_order
-                                                   ,old_order: old_order
-                                        }
-                                        ,listeners: {
-                                            'success': {fn:function (r) {
-                                                el.unmask();
-                                                grid.refresh();
-                                            },scope:grid}
-                                                   ,'failure': {fn:function (r) {
-                                                       el.unmask();
-                                                   },scope:grid}
-                                        }
-                                            }
-                                )
-                            }
-                            ,scope: this
-                        }
-                    }
-                }
-            )]
-        ,tbar: [{
-            xtype: 'bannerrevised-filter-ads'
-            ,id: 'bannerrevised-grid-adpositions-adsfilter'
-            ,position: config.position
-            ,mode: 'exclude'
-            ,width: 250
-            ,listeners: {
-                'select': {fn:function (combo,row,idx) {
-                    this.addAdPosition(row.id, config.position, combo)
-                    combo.clearValue();
-                }, scope:this}
-            }
-            }]
-        }
-    );
-    BannerRev.grid.AdPositions.superclass.constructor.call(this,config)
-};
-Ext.extend(
-    BannerRev.grid.AdPositions,MODx.grid.Grid,{
-        getMenu: function () {
-            var icon = 'x-menu-item-icon icon icon-';
-            var m = [{
-                text: '<i class="' + icon + 'times"></i> ' + _('bannerrevised.adposition.remove')
-                ,handler: this.removeAdPosition
-            }];
-            this.addContextMenuItem(m);
-            return true;
-        }
-        ,removeAdPosition: function () {
-            MODx.Ajax.request(
-                {
-                    url: BannerRev.config.connectorUrl
-                    ,params: {
-                        action: 'mgr/adpositions/remove'
-                        ,id: this.menu.record.id
-                    }
-                    ,listeners: {
-                        'success': {fn:function () {
-                            this.refresh();
-                            Ext.getCmp('bannerrevised-grid-adpositions-adsfilter').store.reload();
-                        },scope:this}
-                    }
-                }
-            );
-        }
-        ,addAdPosition: function (ad, position, combo) {
-            MODx.Ajax.request(
-                {
-                    url: BannerRev.config.connectorUrl
-                    ,params: {
-                        action: 'mgr/adpositions/add'
-                        ,ad: ad
-                        ,position: position
-                    }
-                    ,listeners: {
-                        'success': {fn:function () {
-                            this.refresh();
-                            combo.store.reload();
-                        },scope:this}
-                    }
-                }
-            )
-        }
-    }
-);
-Ext.reg('bannerrevised-grid-adpositions',BannerRev.grid.AdPositions);
+Ext.reg('bannerrevised-grid-positions',bannerrev.grid.Positions);

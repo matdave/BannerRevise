@@ -4,10 +4,10 @@ var BannerRev = function (config) {
 };
 Ext.extend(
     BannerRev,Ext.Component,{
-        page:{},window:{},grid:{},tree:{},panel:{},combo:{},config: {}
+        page:{},window:{},grid:{},tree:{},panel:{},combo:{},component: {}, config: {}
     }
 );
-Ext.reg('BannerRev',BannerRev);
+Ext.reg('bannerrev',BannerRev);
 
-BannerRev = new BannerRev();
+bannerrev = new BannerRev();
 

@@ -1,21 +1,27 @@
 <?php
 
-class AdCreateProcessor extends modObjectCreateProcessor
+namespace BannerRevised\v3\Processors\Ads;
+
+use BannerRevised\Model\Ad;
+use BannerRevised\Model\AdPosition;
+use MODX\Revolution\Processors\Model\CreateProcessor;
+
+class Create extends CreateProcessor
 {
-    public $classKey = 'brevAd';
+    public $classKey = Ad::class;
     public $languageTopics = array('bannerrevised:default');
     public $objectType = 'bannerrevised.ad';
 
-    function afterSave()
+    public function afterSave()
     {
         $positions = $this->getProperty('positions');
 
         //user selected one or more positions, so update
         if (is_array($positions)) {
             foreach ($positions as $position) {
-                $adPos = $this->modx->newObject('brevAdPosition');
+                $adPos = $this->modx->newObject(AdPosition::class);
                 //add settings
-                $idx = $this->modx->getCount('brevAdPosition', array('position' => $position));
+                $idx = $this->modx->getCount(AdPosition::class, array('position' => $position));
                 $adPos->fromArray(
                     array(
                         'ad' => $this->object->get('id'),
@@ -29,5 +35,3 @@ class AdCreateProcessor extends modObjectCreateProcessor
         }
     }
 }
-
-return 'AdCreateProcessor';

@@ -1,13 +1,19 @@
 <?php
 
-class AdEnableProcessor extends modObjectProcessor
+namespace BannerRevised\v3\Processors\Ads;
+
+use BannerRevised\Model\Ad;
+use MODX\Revolution\modAccessibleObject;
+use MODX\Revolution\Processors\ModelProcessor;
+
+class Enable extends ModelProcessor
 {
-    public $classKey = 'brevAd';
+    public $classKey = Ad::class;
     public $languageTopics = array('bannerrevised:default');
     public $objectType = 'bannerrevised.ad';
     public $checkSavePermission = true;
 
-    function initialize()
+    public function initialize()
     {
         $primaryKey = $this->getProperty($this->primaryKeyField, false);
         if (empty($primaryKey)) {
@@ -18,13 +24,17 @@ class AdEnableProcessor extends modObjectProcessor
             return $this->modx->lexicon($this->objectType . '_err_nfs', array($this->primaryKeyField => $primaryKey));
         }
 
-        if ($this->checkSavePermission && $this->object instanceof modAccessibleObject && !$this->object->checkPolicy('save')) {
+        if (
+            $this->checkSavePermission &&
+            $this->object instanceof modAccessibleObject &&
+            !$this->object->checkPolicy('save')
+        ) {
             return $this->modx->lexicon('access_denied');
         }
         return true;
     }
 
-    function process()
+    public function process()
     {
         $this->object->set('active', 1);
         $this->object->save();
@@ -32,5 +42,3 @@ class AdEnableProcessor extends modObjectProcessor
         return $this->modx->error->success('');
     }
 }
-
-return 'AdEnableProcessor';

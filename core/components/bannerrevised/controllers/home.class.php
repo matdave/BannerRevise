@@ -12,16 +12,33 @@ class BannerRevisedHomeManagerController extends modExtraManagerController
 
     public function initialize()
     {
-        if (!class_exists('BannerRevised')) {
-            include_once dirname(__DIR__) . '/model/bannerrevised/bannerrevised.class.php';
+        if (empty($this->modx->version)) {
+            $this->modx->getVersionData();
         }
-        $this->bannerrevised = new BannerRevised($this->modx);
+        if ($this->modx->version['version'] < 3) {
+            $corePath = $this->modx->getOption(
+                'bannerrevised.core_path',
+                null,
+                $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'components/bannerrevised/'
+            );
+            $this->bannerrevised = $this->modx->getService(
+                'bannerrevised',
+                'BannerRevised',
+                $corePath . 'model/bannerrevised/',
+                array(
+                    'core_path' => $corePath
+                )
+            );
+        } else {
+            $this->bannerrevised = $this->modx->getService('bannerrevised');
+        }
+        $this->bannerrevised->config['modx3'] = ($this->modx->version['version'] >= 3);
 
         $this->addJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/bannerrevised.js');
         $this->addHtml(
             '<script type="text/javascript">
         Ext.onReady(function() {
-            BannerRev.config = ' . json_encode($this->bannerrevised->config) . ';
+            bannerrev.config = ' . json_encode($this->bannerrevised->config) . ';
         });
         </script>'
         );
@@ -51,9 +68,16 @@ class BannerRevisedHomeManagerController extends modExtraManagerController
     public function loadCustomCssJs()
     {
         $this->addCss($this->bannerrevised->config['cssUrl'] . 'mgr/main.css');
-        $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/plugins/dragdropgrid.js');
+        $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/utils/combo.js');
+        $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/utils/dragdropgrid.js');
+        $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/utils/form.js');
+        $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/utils/image.js');
+        $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/widgets/adpositions.grid.js');
         $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/widgets/banners.grid.js');
+        $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/widgets/banners.window.js');
         $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/widgets/positions.grid.js');
+        $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/widgets/positions.window.js');
+        $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/widgets/clicks.grid.js');
         $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/widgets/referrers.grid.js');
         $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/widgets/stats.panel.js');
         $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/widgets/home.panel.js');

@@ -1,20 +1,27 @@
 <?php
 
-class GetClicksProcessor extends modObjectGetListProcessor
+namespace BannerRevised\v3\Processors\Ads;
+
+use BannerRevised\Model\Ad;
+use BannerRevised\Model\Click;
+use MODX\Revolution\Processors\Model\GetListProcessor;
+use xPDO\Om\xPDOObject;
+
+class GetClicks extends GetListProcessor
 {
-    public $classKey = 'brevAd';
+    public $classKey = Ad::class;
     public $languageTopics = array('bannerrevised:default');
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
     public $objectType = 'bannerrevised.ad';
 
-    function prepareRow(xPDOObject $object)
+    public function prepareRow(xPDOObject $object)
     {
         $period = $this->getProperty('period');
 
         $object = $object->toArray();
 
-        $clickC = $this->modx->newQuery('brevClick');
+        $clickC = $this->modx->newQuery(Click::class);
         $conditions = array();
         $conditions['ad'] = $object['id'];
 
@@ -26,9 +33,7 @@ class GetClicksProcessor extends modObjectGetListProcessor
             }
         }
         $clickC->andCondition($conditions);
-        $object['clicks'] = $this->modx->getCount('brevClick', $clickC);
+        $object['clicks'] = $this->modx->getCount(Click::class, $clickC);
         return $object;
     }
 }
-
-return 'GetClicksProcessor';

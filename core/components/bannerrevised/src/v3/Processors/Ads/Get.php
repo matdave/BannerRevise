@@ -1,12 +1,17 @@
 <?php
 
-class AdGetProcessor extends modObjectGetProcessor
+namespace BannerRevised\v3\Processors\Ads;
+
+use BannerRevised\Model\Ad;
+use MODX\Revolution\Processors\Model\GetProcessor;
+
+class Get extends GetProcessor
 {
     /**
-     * @var brevAd $object
+     * @var Ad $object
      */
     public $object;
-    public $classKey = 'brevAd';
+    public $classKey = Ad::class;
     public $languageTopics = array('bannerrevised:default');
     public $objectType = 'bannerrevised.ad';
 
@@ -30,5 +35,3 @@ class AdGetProcessor extends modObjectGetProcessor
         return $this->success('', $row);
     }
 }
-
-return 'AdGetProcessor';

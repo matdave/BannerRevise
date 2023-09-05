@@ -1,20 +1,29 @@
 <?php
 
-class AdGetListProcessor extends modObjectGetListProcessor
+namespace BannerRevised\v3\Processors\Ads;
+
+use BannerRevised\Model\Ad;
+use BannerRevised\Model\Click;
+use MODX\Revolution\modResource;
+use MODX\Revolution\Processors\Model\GetListProcessor;
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
+class GetList extends GetListProcessor
 {
-    public $classKey = 'brevAd';
+    public $classKey = Ad::class;
     public $languageTopics = array('bannerrevised:default');
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
     public $objectType = 'bannerrevised.ad';
 
-    function prepareQueryBeforeCount(xPDOQuery $c)
+    public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         // Filter by position
         if ($position = $this->getProperty('position')) {
             $mode = $this->getProperty('mode', 'include');
 
-            $q = $this->modx->newQuery('brevAdPosition');
+            $q = $this->modx->newQuery(AdPosition::class);
             $q->select('ad');
             $q->where(array('position' => $position));
             if ($q->prepare() && $q->stmt->execute()) {
@@ -36,17 +45,17 @@ class AdGetListProcessor extends modObjectGetListProcessor
         return $c;
     }
 
-    function prepareRow(xPDOObject $object)
+    public function prepareRow(xPDOObject $object)
     {
         /**
          * @var brevAd $object
          */
         $row = $object->toArray();
-        $row['clicks'] = $this->modx->getCount('brevClick', array('ad' => $row['id']));
+        $row['clicks'] = $this->modx->getCount(Click::class, array('ad' => $row['id']));
         $row['current_image'] = $object->getImageUrl();
 
         if (preg_match('/\[\[\~([0-9]{1,})\]\]$/', $row['url'], $matches)) {
-            if ($resource = $this->modx->getObject('modResource', $matches[1])) {
+            if ($resource = $this->modx->getObject(modResource::class, $matches[1])) {
                 $row['url'] = '<sup>(' . $resource->id . ')</sup> ' . $resource->pagetitle;
             }
         }
@@ -54,5 +63,3 @@ class AdGetListProcessor extends modObjectGetListProcessor
         return $row;
     }
 }
-
-return 'AdGetListProcessor';

@@ -1,23 +1,26 @@
 <?php
 
-class AdPositionRemoveProcessor extends modObjectRemoveProcessor
+namespace BannerRevised\v3\Processors\AdPositions;
+
+use BannerRevised\Model\AdPosition;
+use MODX\Revolution\Processors\Model\RemoveProcessor;
+
+class Remove extends RemoveProcessor
 {
-    public $classKey = 'brevAdPosition';
+    public $classKey = AdPosition::class;
     public $languageTopics = array('bannerrevised:default');
     public $objectType = 'bannerrevised.adposition';
     public $position = 0;
 
-    function beforeRemove()
+    public function beforeRemove()
     {
         $this->position = $this->object->get('position');
         return true;
     }
 
-    function afterRemove()
+    public function afterRemove()
     {
         $this->modx->bannerrevised->refreshIdx($this->position);
         return true;
     }
 }
-
-return 'AdPositionRemoveProcessor';

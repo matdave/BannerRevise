@@ -1,14 +1,21 @@
 <?php
 
-class AdPositionGetListProcessor extends modObjectGetListProcessor
+namespace BannerRevised\v3\Processors\AdPositions;
+
+use BannerRevised\Model\AdPosition;
+use MODX\Revolution\Processors\Model\GetListProcessor;
+use xPDO\Om\xPDOObject;
+use xPDO\Om\xPDOQuery;
+
+class GetList extends GetListProcessor
 {
-    public $classKey = 'brevAdPosition';
+    public $classKey = AdPosition::class;
     public $languageTopics = array('bannerrevised:default');
     public $defaultSortField = 'idx';
     public $defaultSortDirection = 'ASC';
     public $objectType = 'bannerrevised.adposition';
 
-    function beforeQuery()
+    public function beforeQuery()
     {
         $position = $this->getProperty('position');
         if (empty($position)) {
@@ -17,7 +24,7 @@ class AdPositionGetListProcessor extends modObjectGetListProcessor
         return true;
     }
 
-    function prepareQueryBeforeCount(xPDOQuery $c)
+    public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $position = $this->getProperty('position');
         $c->where(array('position' => $position));
@@ -25,7 +32,7 @@ class AdPositionGetListProcessor extends modObjectGetListProcessor
     }
 
 
-    function prepareRow(xPDOObject $object)
+    public function prepareRow(xPDOObject $object)
     {
         /**
          * @var brevAd $ad
@@ -38,5 +45,3 @@ class AdPositionGetListProcessor extends modObjectGetListProcessor
         return $row;
     }
 }
-
-return 'AdPositionGetListProcessor';

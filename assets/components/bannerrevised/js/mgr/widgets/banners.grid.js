@@ -1,10 +1,12 @@
-BannerRev.grid.Ads = function (config) {
+bannerrev.grid.Ads = function (config) {
     config = config || {};
     Ext.applyIf(
         config,{
             id: 'bannerrevised-grid-ads'
-            ,url: BannerRev.config.connectorUrl
-            ,baseParams: { action: 'mgr/ads/getlist' }
+            ,url: bannerrev.config.modx3 ?
+                MODx.config.connector_url :
+                bannerrev.config.connector_url
+            ,baseParams: { action: bannerrev.config.modx3 ? 'BannerRevised\\v3\\Processors\\Ads\\GetList' : 'mgr/ads/getlist' }
             ,fields: ['id','name', 'url', 'image', 'current_image', 'active', 'positions', 'clicks', 'start', 'end', 'description']
             ,border: false
             ,remoteSort: true
@@ -16,7 +18,7 @@ BannerRev.grid.Ads = function (config) {
             ,{header: _('bannerrevised.ads.clicks'),dataIndex: 'clicks',sortable: false, width: 50}
             ,{header: _('bannerrevised.ads.active'),dataIndex: 'active',sortable: true, renderer: this.renderBoolean, width: 50}
             ,{header: _('bannerrevised.ads.image'),dataIndex: 'current_image',sortable: false,renderer: {fn:function (img) {
-                return BannerRev.renderGridImage(img)}}, id: "byad-thumb", width: 100}
+                return bannerrev.renderGridImage(img)}}, id: "byad-thumb", width: 100}
             ,{header: _('bannerrevised.ads.start'),dataIndex: 'start',sortable: true, width: 75}
             ,{header: _('bannerrevised.ads.end'),dataIndex: 'end',sortable: true, width: 75}
             //,{header: _('bannerrevised.ads.description'),dataIndex: 'description',sortable: false, hidden: true}
@@ -24,16 +26,11 @@ BannerRev.grid.Ads = function (config) {
             ,tbar: [{
                 text: _('bannerrevised.ads.new')
                 ,handler: this.createAd
-            },{
-                xtype: 'tbfill'
-            },{
+            },'->',{
                 xtype: 'bannerrevised-filter-positions'
                 ,id: 'bannerrevised-grid-ads-positionsfilter'
                 ,width: 200
                 ,listeners: {'select': {fn: this.FilterByPosition, scope:this}}
-            },{
-                xtype: 'tbspacer'
-                ,width: 10
             }, {
                 xtype: 'bannerrevised-filter-byquery'
                 ,id: 'bannerrevised-ads-filter-byquery'
@@ -72,29 +69,33 @@ BannerRev.grid.Ads = function (config) {
     );
 
     //positions store/array for checkboxes in add/update window
-    BannerRev.positionsArray = [];
-    BannerRev.posStore = new Ext.data.JsonStore(
+    bannerrev.positionsArray = [];
+    bannerrev.posStore = new Ext.data.JsonStore(
         {
-            url: BannerRev.config.connectorUrl
+            url: bannerrev.config.modx3 ?
+                MODx.config.connector_url :
+                bannerrev.config.connector_url
             ,root: 'results'
-            ,baseParams: { action: 'mgr/positions/getlist', limit : 0 }
+            ,baseParams: { action: bannerrev.config.modx3 ?
+                    'BannerRevised\\v3\\Processors\\Positions\\GetList' :
+                    'mgr/positions/getlist', limit : 0 }
             ,fields: ["id", "name"]
             ,autoLoad: true
             ,listeners: {
                 load: function (t, records, options) {
-                    BannerRev.positionsArray = [];
+                    bannerrev.positionsArray = [];
                     for (var i=0; i<records.length; i++) {
-                        BannerRev.positionsArray.push({name: "positions[]", inputValue: records[i].data.id, boxLabel: records[i].data.name});
+                        bannerrev.positionsArray.push({name: "positions[]", inputValue: records[i].data.id, boxLabel: records[i].data.name});
                     }
                 }
             }
         }
     );
 
-    BannerRev.grid.Ads.superclass.constructor.call(this,config);
+    bannerrev.grid.Ads.superclass.constructor.call(this,config);
 };
 Ext.extend(
-    BannerRev.grid.Ads,MODx.grid.Grid,{
+    bannerrev.grid.Ads,MODx.grid.Grid,{
         getMenu: function (grid,idx) {
             var icon = 'x-menu-item-icon icon icon-';
             var row = grid.store.data.items[idx]
@@ -148,7 +149,7 @@ Ext.extend(
             this.refresh();
         }
         ,createAd: function (btn,e) {
-            if (BannerRev.positionsArray.length == 0) {
+            if (bannerrev.positionsArray.length == 0) {
                 MODx.msg.alert(_('error'),_('bannerrevised.error.no_positions'));
                 Ext.getCmp('bannerrevised-tabs').setActiveTab('bannerrevised-positions');
                 return;
@@ -160,7 +161,9 @@ Ext.extend(
                     ,openTo: '/'
                     ,closeAction: 'close'
                     ,baseParams: {
-                        action: 'mgr/ads/create'
+                        action: bannerrev.config.modx3 ?
+                            'BannerRevised\\v3\\Processors\\Ads\\Create' :
+                            'mgr/ads/create'
                     }
                     ,listeners: {
                         success: {fn:this.refresh,scope:this}
@@ -177,7 +180,7 @@ Ext.extend(
         }
         ,updateAd: function (btn,e, row) {
             if (typeof(row) != 'undefined') {this.menu.record = row.data;}
-            if (BannerRev.positionsArray.length == 0) {
+            if (bannerrev.positionsArray.length == 0) {
                 MODx.msg.alert(_('error'),_('bannerrevised.error.no_positions'));
                 Ext.getCmp('bannerrevised-tabs').setActiveTab('bannerrevised-positions');
                 return;
@@ -197,9 +200,13 @@ Ext.extend(
 
             MODx.Ajax.request(
                 {
-                    url: BannerRev.config.connectorUrl
+                    url: bannerrev.config.modx3 ?
+                        MODx.config.connector_url :
+                        bannerrev.config.connector_url
                     ,params: {
-                        action: 'mgr/ads/get'
+                        action: bannerrev.config.modx3 ?
+                            'BannerRevised\\v3\\Processors\\Ads\\Get' :
+                            'mgr/ads/get'
                         ,id: this.menu.record.id
                     }
                     ,listeners: {
@@ -241,7 +248,9 @@ Ext.extend(
                     ,text: _('bannerrevised.ads.remove.confirm')
                     ,url: this.config.url
                     ,params: {
-                        action: 'mgr/ads/remove'
+                        action: bannerrev.config.modx3 ?
+                            'BannerRevised\\v3\\Processors\\Ads\\Remove' :
+                            'mgr/ads/remove'
                         ,id: this.menu.record.id
                     }
                     ,listeners: {
@@ -253,9 +262,13 @@ Ext.extend(
         ,enableAd: function () {
             MODx.Ajax.request(
                 {
-                    url: BannerRev.config.connectorUrl
+                    url: bannerrev.config.modx3 ?
+                        MODx.config.connector_url :
+                        bannerrev.config.connector_url
                     ,params: {
-                        action: 'mgr/ads/enable'
+                        action: bannerrev.config.modx3 ?
+                            'BannerRevised\\v3\\Processors\\Ads\\Enable' :
+                            'mgr/ads/enable'
                           ,id: this.menu.record.id
                     }
                     ,listeners: {
@@ -267,9 +280,13 @@ Ext.extend(
         ,disableAd: function () {
             MODx.Ajax.request(
                 {
-                    url: BannerRev.config.connectorUrl
+                    url: bannerrev.config.modx3 ?
+                        MODx.config.connector_url :
+                        bannerrev.config.connector_url
                     ,params: {
-                        action: 'mgr/ads/disable'
+                        action: bannerrev.config.modx3 ?
+                            'BannerRevised\\v3\\Processors\\Ads\\Disable' :
+                            'mgr/ads/disable'
                         ,id: this.menu.record.id
                     }
                     ,listeners: {
@@ -297,179 +314,4 @@ Ext.extend(
         }
     }
 );
-Ext.reg('bannerrevised-grid-ads',BannerRev.grid.Ads);
-
-BannerRev.window.Ad = function (config) {
-    config = config || {};
-    Ext.applyIf(
-        config,{
-            id: 'bannerrevised-window-ad'
-            ,title: _('bannerrevised.ads.new')
-            ,url: BannerRev.config.connectorUrl
-            //,fileUpload: true
-            ,modal: true
-            ,resizable: false
-            ,maximizable: false
-            ,autoHeight: true
-            ,width: 600
-            ,baseParams: {
-                action: 'mgr/ads/update'
-            }
-            ,fields: [{
-                xtype: 'hidden'
-                ,name: 'id'
-            },{
-                xtype: 'hidden'
-                ,name: 'image'
-                ,anchor: '99%'
-                ,id: 'image'
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('bannerrevised.ads.name')
-                ,name: 'name'
-                ,anchor: '99%'
-                ,allowBlank: false
-            },{
-                items: [{
-                    layout: 'form'
-                    ,items: [{
-                        layout: 'column'
-                        ,border: false
-                        ,items: [{
-                            columnWidth: .8
-                                 ,border: false
-                                 ,layout: 'form'
-                                 ,items: [{
-                                        xtype: 'modx-combo-source'
-                                        ,fieldLabel: _('bannerrevised.ads.source')
-                                        ,id: 'modx-combo-source'
-                                        ,name: 'source'
-                                        ,anchor: '100%'
-                                        ,value: config.record ? config.record.source : BannerRev.config['media_source']
-                            }]
-                        },{
-                            columnWidth: .2
-                                 ,border: false
-                                 ,layout: 'form'
-                                 ,items: [{
-                                        xtype: 'xcheckbox'
-                                        ,fieldLabel: _('bannerrevised.ads.active')
-                                        ,name: 'active'
-                                        ,inputValue: 1
-                                        ,checked: !config.update
-                            }]
-                        }]
-                    }]
-                }]
-            },{
-                items: [{
-                    layout: 'column'
-                    ,border: false
-                    ,items: [{
-                        columnWidth: .3
-                        ,border: false
-                        ,layout: 'form'
-                        ,items: [{
-                            id: 'currimg'
-                                 //,hideLabel: true
-                                 ,style: 'margin-top: 20px;'
-                                 ,xtype: 'image'
-                                 ,cls: 'bannerrevised-thumb-window'
-                        }]
-                    },{
-                        columnWidth: .7
-                        ,border: false
-                        ,layout: 'form'
-                        ,style: 'margin-right: 5px;'
-                        ,items: [{
-                            xtype: 'modx-combo-adbrowser'
-                                 ,fieldLabel: config.update ? _('bannerrevised.ads.image.current') : _('bannerrevised.ads.image.new')
-                                 ,name: 'newimage'
-                                 ,hideFiles: true
-                                 ,anchor: '99%'
-                                 ,allowBlank: true
-                                 ,openTo: config.openTo || '/'
-                                 ,listeners: {
-                                        select: {fn:function (data) {
-                                                 Ext.getCmp('currimg').setSrc(data.url, Ext.getCmp('modx-combo-source').getValue());
-                                                  Ext.getCmp('image').setValue(data.relativeUrl);
-                                        }}
-                                        ,change: {fn:function (data) {
-                                                  var value = this.getValue();
-                                                  Ext.getCmp('currimg').setSrc(value, Ext.getCmp('modx-combo-source').getValue());
-                                                  Ext.getCmp('image').setValue(value);
-                                        }}
-                            }
-                        },{
-                            xtype: 'bannerrevised-filter-resources'
-                                 ,fieldLabel: _('bannerrevised.ads.url')
-                                 ,name: 'url'
-                                 ,description: _('bannerrevised.ads.url.description')
-                                 ,anchor: '99%'
-                                 ,allowBlank: true
-                        },{
-                            xtype: 'textarea'
-                                 ,fieldLabel: _('bannerrevised.ads.description')
-                                 ,name: 'description'
-                                 ,anchor: '99%'
-                                 ,height: 75
-                                 ,allowBlank: true
-                                 ,resize: true
-                        }]
-                    }]
-                }]
-            },{
-                items: [{
-                    layout: 'form'
-                    ,items: [{
-                        layout: 'column'
-                        ,border: false
-                        ,items: [{
-                            columnWidth: .5
-                                 ,border: false
-                                 ,layout: 'form'
-                                 ,items: [{
-                                        xtype : 'xdatetime'
-                                        ,fieldLabel: _('bannerrevised.ads.start')
-                                        ,name: 'start'
-                                        ,dateFormat: 'Y-m-d'
-                                        ,allowBlank: true
-                                        ,timeFormat: 'H:i'
-                                        ,emptyText: null
-                                        ,anchor: '99%'
-                            }]
-                        },{
-                            columnWidth: .5
-                                 ,border: false
-                                 ,layout: 'form'
-                                 ,style: 'margin-right: 5px;'
-                                 ,items: [{
-                                        xtype : 'xdatetime'
-                                        ,fieldLabel: _('bannerrevised.ads.end')
-                                        ,name: 'end'
-                                        ,allowBlank: true
-                                        ,dateFormat: 'Y-m-d'
-                                        ,timeFormat: 'H:i'
-                                        ,emptyText: null
-                                        ,anchor: '99%'
-                            }]
-                        }]
-                    }]
-                }]
-            },{
-                xtype: 'checkboxgroup'
-                ,id: 'positions'
-                ,columns: 3
-                ,items: BannerRev.positionsArray
-                ,fieldLabel: _('bannerrevised.positions')
-                ,name: 'positions'
-            }
-            ]
-            ,keys: [{key: Ext.EventObject.ENTER,shift: true,fn:  function () {
-                this.submit()},scope: this}]
-        }
-    );
-    BannerRev.window.Ad.superclass.constructor.call(this,config);
-};
-Ext.extend(BannerRev.window.Ad,MODx.Window);
-Ext.reg('bannerrevised-window-ad',BannerRev.window.Ad);
+Ext.reg('bannerrevised-grid-ads',bannerrev.grid.Ads);

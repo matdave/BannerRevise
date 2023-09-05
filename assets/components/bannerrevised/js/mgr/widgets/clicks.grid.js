@@ -1,24 +1,24 @@
-bannerrev.grid.Referrers = function (config) {
+bannerrev.grid.Clicks = function (config) {
     config = config || {};
     Ext.applyIf(
         config,{
-            id: 'bannerrevised-grid-referrers'
+            id: 'bannerrevised-grid-clicks'
             ,url: bannerrev.config.modx3 ?
                 MODx.config.connector_url :
                 bannerrev.config.connector_url
             ,baseParams: { action: bannerrev.config.modx3 ?
-                    'BannerRevised\\v3\\Processors\\Clicks\\GetReferrers' :
-                    'mgr/clicks/getreferrers', period: ''}
-            ,fields: ['referrer', 'clicks']
+                    'BannerRevised\\v3\\Processors\\Ads\\GetClicks' :
+                    'mgr/ads/getclicks', period: ''}
+            ,fields: ['id','name', 'url', 'image', 'current_image', 'active', 'positions', 'clicks', 'start', 'end', 'description', 'clicks']
             ,paging: true
             ,border: false
             ,frame: false
             ,remoteSort: false
             ,anchor: '97%'
-            ,autoExpandColumn: 'referrer'
+            ,autoExpandColumn: 'name'
             ,columns: [{
-                header: _('bannerrevised.stats.referrer')
-                ,dataIndex: 'referrer'
+                header: _('bannerrevised.ads.name')
+                ,dataIndex: 'name'
                 ,sortable: true
             },{
                 header: _('bannerrevised.stats.clicks')
@@ -27,7 +27,7 @@ bannerrev.grid.Referrers = function (config) {
             }]
             ,tbar: [{
                 xtype: 'modx-combo'
-                ,id: 'bannerrevised-referrers-period'
+                ,id: 'bannerrevised-clicks-period'
                 ,mode: 'local'
                 ,store: new Ext.data.SimpleStore(
                     {
@@ -44,10 +44,10 @@ bannerrev.grid.Referrers = function (config) {
             }]
         }
     );
-    bannerrev.grid.Referrers.superclass.constructor.call(this,config)
+    bannerrev.grid.Clicks.superclass.constructor.call(this,config)
 };
 Ext.extend(
-    bannerrev.grid.Referrers,MODx.grid.Grid,{
+    bannerrev.grid.Clicks,MODx.grid.Grid,{
         setPeriod: function (tf,nv,ov) {
             var s = this.getStore();
             s.baseParams.period = tf.getValue();
@@ -56,4 +56,4 @@ Ext.extend(
         }
     }
 );
-Ext.reg('bannerrevised-grid-referrers',bannerrev.grid.Referrers);
+Ext.reg('bannerrevised-grid-clicks',bannerrev.grid.Clicks);

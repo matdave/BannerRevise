@@ -1,13 +1,19 @@
 <?php
 
-class AdPositionUpdateProcessor extends modObjectProcessor
+namespace BannerRevised\v3\Processors\AdPositions;
+
+use BannerRevised\Model\AdPosition;
+use MODX\Revolution\modAccessibleObject;
+use MODX\Revolution\Processors\ModelProcessor;
+
+class Sort extends ModelProcessor
 {
-    public $classKey = 'brevAdPosition';
+    public $classKey = AdPosition::class;
     public $languageTopics = array('bannerrevised:default');
     public $objectType = 'bannerrevised.adposition';
     public $checkSavePermission = true;
 
-    function initialize()
+    public function initialize()
     {
         $primaryKey = $this->getProperty($this->primaryKeyField, false);
         if (empty($primaryKey)) {
@@ -29,7 +35,7 @@ class AdPositionUpdateProcessor extends modObjectProcessor
     }
 
 
-    function process()
+    public function process()
     {
         $new_order = $this->getProperty('new_order');
         $old_order = $this->getProperty('old_order');
@@ -95,5 +101,3 @@ class AdPositionUpdateProcessor extends modObjectProcessor
         return $this->modx->error->success();
     }
 }
-
-return 'AdPositionUpdateProcessor';

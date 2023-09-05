@@ -41,6 +41,9 @@
 		<index alias="ad" name="ad" primary="false" unique="false" type="BTREE">
 			<column key="ad" length="" collation="A" null="false" />
 		</index>
+		<index alias="idx" name="idx" primary="false" unique="false" type="BTREE">
+			<column key="idx" length="" collation="A" null="false" />
+		</index>
 		<index alias="position" name="position" primary="false" unique="false" type="BTREE">
 			<column key="position" length="" collation="A" null="false" />
 		</index>
@@ -54,6 +57,13 @@
 		<field key="clickdate" dbtype="datetime" phptype="datetime" null="true" />
 		<field key="referrer" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="ip" dbtype="varchar" precision="39" phptype="string" null="false" />
+
+		<index alias="clicks" name="clicks" primary="false" unique="false" type="BTREE">
+			<column key="ad" length="" collation="A" null="false" />
+			<column key="position" length="" collation="A" null="false" />
+			<column key="ip" length="" collation="A" null="false" />
+			<column key="clickdate" length="" collation="A" null="false" />
+		</index>
 
 		<aggregate alias="Ad" class="Ad" local="ad" foreign="id" cardinality="one" owner="foreign" />
 		<aggregate alias="Position" class="BannerRevised\Model\Position" local="position" foreign="id" cardinality="one" owner="foreign" />

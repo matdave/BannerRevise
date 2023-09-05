@@ -1,28 +1,26 @@
 <?php
-
 /**
  * @package bannerrevised
  */
-
-$xpdo_meta_map['brevClick'] = array (
+$xpdo_meta_map['brevClick']= array (
   'package' => 'bannerrevised',
   'version' => '0.1',
   'table' => 'ban_rev_clicks',
-  'tableMeta' =>
+  'tableMeta' => 
   array (
     'engine' => 'InnoDB',
   ),
-  'fields' =>
+  'fields' => 
   array (
-    'ad' => null,
-    'position' => null,
-    'clickdate' => null,
-    'referrer' => null,
-    'ip' => null,
+    'ad' => NULL,
+    'position' => NULL,
+    'clickdate' => NULL,
+    'referrer' => NULL,
+    'ip' => NULL,
   ),
-  'fieldMeta' =>
+  'fieldMeta' => 
   array (
-    'ad' =>
+    'ad' => 
     array (
       'dbtype' => 'integer',
       'precision' => '10',
@@ -31,7 +29,7 @@ $xpdo_meta_map['brevClick'] = array (
       'null' => false,
       'index' => 'index',
     ),
-    'position' =>
+    'position' => 
     array (
       'dbtype' => 'integer',
       'precision' => '10',
@@ -40,20 +38,20 @@ $xpdo_meta_map['brevClick'] = array (
       'null' => false,
       'index' => 'index',
     ),
-    'clickdate' =>
+    'clickdate' => 
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
       'null' => true,
     ),
-    'referrer' =>
+    'referrer' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
       'phptype' => 'string',
       'null' => false,
     ),
-    'ip' =>
+    'ip' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '39',
@@ -61,9 +59,46 @@ $xpdo_meta_map['brevClick'] = array (
       'null' => false,
     ),
   ),
-  'aggregates' =>
+  'indexes' => 
   array (
-    'Ad' =>
+    'clicks' => 
+    array (
+      'alias' => 'clicks',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'ad' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'position' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'ip' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'clickdate' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'Ad' => 
     array (
       'class' => 'brevAd',
       'local' => 'ad',
@@ -71,7 +106,7 @@ $xpdo_meta_map['brevClick'] = array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'Position' =>
+    'Position' => 
     array (
       'class' => 'brevPosition',
       'local' => 'position',

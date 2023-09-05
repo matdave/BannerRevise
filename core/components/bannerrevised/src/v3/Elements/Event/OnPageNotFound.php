@@ -23,7 +23,7 @@ class OnPageNotFound extends Event
                     'ad' => $ad->get('id'),
                     'position' => $ad->get('position'),
                     'ip' => $_SERVER['REMOTE_ADDR'],
-                    'clickdate:LIKE' => date('Y-m-d') . '%'
+                    'clickdate' => date('Y-m-d H') . ':00:00'
                 ];
                 if (!$this->modx->getCount(Click::class, $key)) {
                     $click = $this->modx->newObject(
@@ -31,7 +31,7 @@ class OnPageNotFound extends Event
                         [
                             'ad' => $ad->get('id'),
                             'position' => $ad->get('position'),
-                            'clickdate' => date('Y-m-d H:i:s'),
+                            'clickdate' => date('Y-m-d H:00:00'),
                             'referrer' => $_SERVER['HTTP_REFERER'],
                             'ip' => $_SERVER['REMOTE_ADDR']
                         ]

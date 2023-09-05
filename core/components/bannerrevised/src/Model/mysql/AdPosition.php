@@ -67,6 +67,22 @@ class AdPosition extends \BannerRevised\Model\AdPosition
                     ),
                 ),
             ),
+            'idx' => 
+            array (
+                'alias' => 'idx',
+                'primary' => false,
+                'unique' => false,
+                'type' => 'BTREE',
+                'columns' => 
+                array (
+                    'idx' => 
+                    array (
+                        'length' => '',
+                        'collation' => 'A',
+                        'null' => false,
+                    ),
+                ),
+            ),
             'position' => 
             array (
                 'alias' => 'position',

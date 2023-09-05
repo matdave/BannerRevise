@@ -1,31 +1,29 @@
 <?php
-
 /**
  * @package bannerrevised
  */
-
-$xpdo_meta_map['brevAd'] = array (
+$xpdo_meta_map['brevAd']= array (
   'package' => 'bannerrevised',
   'version' => '0.1',
   'table' => 'ban_rev_ads',
-  'tableMeta' =>
+  'tableMeta' => 
   array (
     'engine' => 'InnoDB',
   ),
-  'fields' =>
+  'fields' => 
   array (
     'name' => '',
     'url' => '',
     'image' => '',
     'source' => 1,
     'active' => 0,
-    'description' => null,
-    'start' => null,
-    'end' => null,
+    'description' => NULL,
+    'start' => NULL,
+    'end' => NULL,
   ),
-  'fieldMeta' =>
+  'fieldMeta' => 
   array (
-    'name' =>
+    'name' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -33,7 +31,7 @@ $xpdo_meta_map['brevAd'] = array (
       'null' => false,
       'default' => '',
     ),
-    'url' =>
+    'url' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -41,7 +39,7 @@ $xpdo_meta_map['brevAd'] = array (
       'null' => true,
       'default' => '',
     ),
-    'image' =>
+    'image' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -49,7 +47,7 @@ $xpdo_meta_map['brevAd'] = array (
       'null' => true,
       'default' => '',
     ),
-    'source' =>
+    'source' => 
     array (
       'dbtype' => 'integer',
       'precision' => '10',
@@ -58,7 +56,7 @@ $xpdo_meta_map['brevAd'] = array (
       'null' => true,
       'default' => 1,
     ),
-    'active' =>
+    'active' => 
     array (
       'dbtype' => 'tinyint',
       'precision' => '1',
@@ -67,36 +65,36 @@ $xpdo_meta_map['brevAd'] = array (
       'null' => false,
       'default' => 0,
     ),
-    'description' =>
+    'description' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => true,
     ),
-    'start' =>
+    'start' => 
     array (
       'dbtype' => 'datetime',
       'phptype' => 'timestamp',
       'null' => true,
     ),
-    'end' =>
+    'end' => 
     array (
       'dbtype' => 'datetime',
       'phptype' => 'timestamp',
       'null' => true,
     ),
   ),
-  'indexes' =>
+  'indexes' => 
   array (
-    'active' =>
+    'active' => 
     array (
       'alias' => 'active',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' =>
+      'columns' => 
       array (
-        'active' =>
+        'active' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -104,15 +102,15 @@ $xpdo_meta_map['brevAd'] = array (
         ),
       ),
     ),
-    'start' =>
+    'start' => 
     array (
       'alias' => 'start',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' =>
+      'columns' => 
       array (
-        'start' =>
+        'start' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -120,15 +118,15 @@ $xpdo_meta_map['brevAd'] = array (
         ),
       ),
     ),
-    'end' =>
+    'end' => 
     array (
       'alias' => 'end',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' =>
+      'columns' => 
       array (
-        'end' =>
+        'end' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -137,9 +135,9 @@ $xpdo_meta_map['brevAd'] = array (
       ),
     ),
   ),
-  'composites' =>
+  'composites' => 
   array (
-    'Positions' =>
+    'Positions' => 
     array (
       'class' => 'brevAdPosition',
       'local' => 'id',
@@ -147,7 +145,7 @@ $xpdo_meta_map['brevAd'] = array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'Clicks' =>
+    'Clicks' => 
     array (
       'class' => 'brevClick',
       'local' => 'id',

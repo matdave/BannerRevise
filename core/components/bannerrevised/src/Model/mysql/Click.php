@@ -63,6 +63,43 @@ class Click extends \BannerRevised\Model\Click
                 'null' => false,
             ),
         ),
+        'indexes' => 
+        array (
+            'clicks' => 
+            array (
+                'alias' => 'clicks',
+                'primary' => false,
+                'unique' => false,
+                'type' => 'BTREE',
+                'columns' => 
+                array (
+                    'ad' => 
+                    array (
+                        'length' => '',
+                        'collation' => 'A',
+                        'null' => false,
+                    ),
+                    'position' => 
+                    array (
+                        'length' => '',
+                        'collation' => 'A',
+                        'null' => false,
+                    ),
+                    'ip' => 
+                    array (
+                        'length' => '',
+                        'collation' => 'A',
+                        'null' => false,
+                    ),
+                    'clickdate' => 
+                    array (
+                        'length' => '',
+                        'collation' => 'A',
+                        'null' => false,
+                    ),
+                ),
+            ),
+        ),
         'aggregates' => 
         array (
             'Ad' => 

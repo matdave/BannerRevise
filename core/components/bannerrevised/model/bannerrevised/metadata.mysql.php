@@ -1,7 +1,7 @@
 <?php
 
 $xpdo_meta_map = array (
-  'xPDOSimpleObject' =>
+  'xPDOSimpleObject' => 
   array (
     0 => 'brevAd',
     1 => 'brevPosition',

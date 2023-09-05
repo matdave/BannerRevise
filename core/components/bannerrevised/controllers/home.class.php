@@ -9,7 +9,6 @@ class BannerRevisedHomeManagerController extends modExtraManagerController
      */
     public $bannerrevised;
 
-
     public function initialize()
     {
         if (empty($this->modx->version)) {
@@ -46,24 +45,20 @@ class BannerRevisedHomeManagerController extends modExtraManagerController
         parent::initialize();
     }
 
-
     public function getLanguageTopics()
     {
         return array('bannerrevised:default');
     }
-
 
     public function checkPermissions()
     {
         return true;
     }
 
-
     public function getPageTitle()
     {
         return $this->modx->lexicon('bannerrevised');
     }
-
 
     public function loadCustomCssJs()
     {
@@ -84,7 +79,6 @@ class BannerRevisedHomeManagerController extends modExtraManagerController
         $this->addLastJavascript($this->bannerrevised->config['jsUrl'] . 'mgr/sections/index.js');
         $this->addLastJavascript(MODX_MANAGER_URL . 'assets/modext/util/datetime.js');
     }
-
 
     public function getTemplateFile()
     {

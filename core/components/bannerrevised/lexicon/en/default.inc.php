@@ -8,9 +8,9 @@
  */
 
 $_lang['bannerrevised'] = 'BannerRevised';
-$_lang['bannerrevised.desc'] = 'BannerRevised - manage ads';
+$_lang['bannerrevised.desc'] = 'BannerRevised - manage banners';
 
-$_lang['bannerrevised.ads'] = 'Ads';
+$_lang['bannerrevised.ads'] = 'Banners';
 $_lang['bannerrevised.ads.name'] = 'Name';
 $_lang['bannerrevised.ads.url'] = 'URL';
 $_lang['bannerrevised.ads.url.description'] = 'You can specify site resource or an http address';
@@ -19,15 +19,15 @@ $_lang['bannerrevised.ads.image.new'] = 'New image';
 $_lang['bannerrevised.ads.image.current'] = 'Current image';
 $_lang['bannerrevised.ads.active'] = 'Active';
 $_lang['bannerrevised.ads.clicks'] = 'Clicks';
-$_lang['bannerrevised.ads.new'] = 'New ad';
-$_lang['bannerrevised.ads.update'] = 'Update ad';
-$_lang['bannerrevised.ads.remove'] = 'Remove ad';
-$_lang['bannerrevised.ads.remove.confirm'] = 'Are you sure you want to remove this ad?';
+$_lang['bannerrevised.ads.new'] = 'New banner';
+$_lang['bannerrevised.ads.update'] = 'Update banner';
+$_lang['bannerrevised.ads.remove'] = 'Remove banner';
+$_lang['bannerrevised.ads.remove.confirm'] = 'Are you sure you want to remove this banner?';
 $_lang['bannerrevised.ads.error.nf'] = 'Ad not found';
 $_lang['bannerrevised.ads.description'] = 'Text of banner';
-$_lang['bannerrevised.ads.enable'] = 'Enable ad';
-$_lang['bannerrevised.ads.disable'] = 'Disable ad';
-$_lang['bannerrevised.ads.add'] = 'Add ad';
+$_lang['bannerrevised.ads.enable'] = 'Enable banner';
+$_lang['bannerrevised.ads.disable'] = 'Disable banner';
+$_lang['bannerrevised.ads.add'] = 'Add banner';
 $_lang['bannerrevised.ads.error.ns'] = 'Ad not set';
 $_lang['bannerrevised.ads.source'] = 'Media source';
 $_lang['bannerrevised.ads.start'] = 'Start of display';
@@ -46,7 +46,7 @@ $_lang['bannerrevised.positions.error.ns'] = 'Position not set';
 
 $_lang['bannerrevised.adposition.idx'] = 'Index';
 $_lang['bannerrevised.adposition.remove'] = 'Remove';
-$_lang['bannerrevised.adposition.error.ae'] = 'This ad is already enabled in this position.';
+$_lang['bannerrevised.adposition.error.ae'] = 'This banner is already enabled in this position.';
 
 $_lang['bannerrevised.stats'] = 'Statistics';
 $_lang['bannerrevised.stats.clicks'] = 'Clicks';
@@ -57,5 +57,8 @@ $_lang['bannerrevised.stats.lastmonth'] = 'Last month';
 $_lang['bannerrevised.stats.thisyear'] = 'This year';
 $_lang['bannerrevised.stats.today'] = 'Today';
 $_lang['bannerrevised.stats.overall'] = 'Overall';
+
+$_lang['bannerrevised.snippet.error.nf'] = 'Unable to load snippet class.';
+$_lang['bannerrevised.plugin.error.nf'] = 'Unable to load plugin class.';
 
 $_lang['bannerrevised.error.no_positions'] = 'You must create at least one position for placement of banners.';

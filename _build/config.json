@@ -57,10 +57,6 @@
               "type": "combo-boolean",
               "value": 0
             },{
-              "name": "fastMode",
-              "type": "combo-boolean",
-              "value": 0
-            },{
               "name": "limit",
               "type": "numberfield",
               "value": 5

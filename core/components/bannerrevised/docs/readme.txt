@@ -1,5 +1,6 @@
-BannerRevised - manage your ads
+BannerRevised for MODX Revolution.
 
-Simple and handy way to manage your banner ads. Also this can be used without images, as only-text ads.
+Simple and handy way to manage your banner ads.
+Also this can be used without images, as only-text ads.
 
-it is fork from Jeroen Kenters BannerX with some good new features.
+It is forked from bezumkin & modx-pro BannerY which is forked from Jeroen Kenters BannerX.

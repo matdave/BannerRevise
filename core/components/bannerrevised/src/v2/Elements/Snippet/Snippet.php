@@ -24,8 +24,6 @@ class Snippet
 
     public function run()
     {
-        $class = 'brevAd';
-
         $positions = $this->getOption('positions');
         $showLog = $this->getOption('showLog', false);
         $limit = $this->getOption('limit', 0);
@@ -69,14 +67,14 @@ class Snippet
             $sortby = 'Positions.idx';
         }
 
-        $c = $this->modx->newQuery($class);
+        $c = $this->modx->newQuery('brevAd');
         $c->select('brevAd.*, `Positions`.`idx`, `Positions`.`position` as `adposition`');
         $c->where($where);
         $c->sortby($sortby, $sortdir);
         $c->limit($limit, $offset);
         $c->leftJoin('brevAdPosition', 'Positions', '`brevAd`.`id` = `Positions`.`ad`');
 
-        $rows = $this->modx->getCollection($class, $c);
+        $rows = $this->modx->getCollection('brevAd', $c);
 
         $output = array();
         $default_source = $this->bannerrevised->getOption(

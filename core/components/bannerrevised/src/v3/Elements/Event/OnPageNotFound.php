@@ -44,7 +44,7 @@ class OnPageNotFound extends Event
                 $chunk->setContent($url);
                 $url = $chunk->process($_GET);
 
-                $this->modx->sendRedirect($url);
+                $this->modx->sendRedirect($url, ['responseCode' => 'HTTP/1.1 302 Found']);
             }
         }
     }

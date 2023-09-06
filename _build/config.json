@@ -35,10 +35,7 @@
           "name": "BannerRevisedClickout",
           "file": "plugin.bannerrevisedclickout.php",
           "events": [
-            {
-              "event": "OnPageNotFound",
-              "priority": 0
-            }
+            "OnPageNotFound"
           ]
         }
       ],

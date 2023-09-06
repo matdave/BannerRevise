@@ -95,7 +95,7 @@ class Click extends \BannerRevised\Model\Click
                     array (
                         'length' => '',
                         'collation' => 'A',
-                        'null' => false,
+                        'null' => true,
                     ),
                 ),
             ),

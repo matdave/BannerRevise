@@ -19,8 +19,6 @@
           "file": "chunk.brevad.tpl",
           "properties": [
             {
-              "name": "bannerrevised_click"
-            },{
               "name": "adposition"
             },{
               "name": "image"

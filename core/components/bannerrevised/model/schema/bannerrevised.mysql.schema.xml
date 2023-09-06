@@ -62,7 +62,7 @@
 			<column key="ad" length="" collation="A" null="false" />
 			<column key="position" length="" collation="A" null="false" />
 			<column key="ip" length="" collation="A" null="false" />
-			<column key="clickdate" length="" collation="A" null="false" />
+			<column key="clickdate" length="" collation="A" null="true" />
 		</index>
 
 		<aggregate alias="Ad" class="brevAd" local="ad" foreign="id" cardinality="one" owner="foreign" />

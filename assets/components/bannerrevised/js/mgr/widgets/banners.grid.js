@@ -7,7 +7,7 @@ bannerrev.grid.Ads = function (config) {
                 MODx.config.connector_url :
                 bannerrev.config.connector_url
             ,baseParams: { action: bannerrev.config.modx3 ? 'BannerRevised\\v3\\Processors\\Ads\\GetList' : 'mgr/ads/getlist' }
-            ,fields: ['id','name', 'url', 'image', 'current_image', 'active', 'positions', 'clicks', 'start', 'end', 'description']
+            ,fields: ['id','name', 'url', 'type', 'image', 'current_image', 'active', 'positions', 'clicks', 'start', 'end', 'description', 'html']
             ,border: false
             ,remoteSort: true
             ,paging: true
@@ -17,6 +17,7 @@ bannerrev.grid.Ads = function (config) {
             ,{header: _('bannerrevised.ads.url'),dataIndex: 'url',sortable: true, width: 100}
             ,{header: _('bannerrevised.ads.clicks'),dataIndex: 'clicks',sortable: false, width: 50}
             ,{header: _('bannerrevised.ads.active'),dataIndex: 'active',sortable: true, renderer: this.renderBoolean, width: 50}
+            ,{header: _('bannerrevised.ads.type'),dataIndex: 'type',sortable: true, width: 75}
             ,{header: _('bannerrevised.ads.image'),dataIndex: 'current_image',sortable: false,renderer: {fn:function (img) {
                 return bannerrev.renderGridImage(img)}}, id: "byad-thumb", width: 100}
             ,{header: _('bannerrevised.ads.start'),dataIndex: 'start',sortable: true, width: 75}
@@ -176,7 +177,7 @@ Ext.extend(
                     w.setPosition(null,50)},this
             );
             Ext.getCmp('bannerrevised-window-ad').reset();
-            Ext.getCmp('currimg').setSrc('');
+            // Ext.getCmp('currimg').setSrc('');
         }
         ,updateAd: function (btn,e, row) {
             if (typeof(row) != 'undefined') {this.menu.record = row.data;}
@@ -234,7 +235,9 @@ Ext.extend(
                                 e.target,function () {
                                     w.setPosition(null,50)},this
                             );
-                            Ext.getCmp('currimg').setSrc(record.current_image);
+                            if (record.type == 'image') {
+                                Ext.getCmp('currimg').setSrc(record.current_image);
+                            }
                             this.enablePositions(record.positions);
                         },scope:this}
                     }

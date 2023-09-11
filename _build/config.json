@@ -3,7 +3,7 @@
   "lowCaseName": "bannerrevised",
   "description": "BannerRevised - manage ads",
   "author": "matdave",
-  "version": "1.0.0-pl",
+  "version": "1.1.0-pl",
   "package": {
     "menus": [
       {
@@ -26,6 +26,17 @@
               "name": "name"
             },{
               "name": "description"
+            }
+          ]
+        },
+        {
+          "name": "brevHTMLAd",
+          "file": "chunk.brevhtmlad.tpl",
+          "properties": [
+            {
+              "name": "adposition"
+            },{
+              "name": "html"
             }
           ]
         }

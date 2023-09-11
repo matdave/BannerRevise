@@ -1,5 +1,9 @@
 Changelog for BannerRevised.
 
+1.1.0-pl
+====================
+- Add HTML Type to banners
+
 1.0.0-pl
 ====================
 - Initial release

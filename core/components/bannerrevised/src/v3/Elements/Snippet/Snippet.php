@@ -41,6 +41,14 @@ class Snippet
         $tplFirst = $this->getOption('tplFirst', $tpl);
         $tplLast = $this->getOption('tplLast', $tpl);
         $tplOdd = $this->getOption('tplOdd', $tpl);
+        $tplImage = $this->getOption('tplImage', $tpl);
+        $tplImageFirst = $this->getOption('tplImageFirst', $tplImage);
+        $tplImageLast = $this->getOption('tplImageLast', $tplImage);
+        $tplImageOdd = $this->getOption('tplImageOdd', $tplImage);
+        $tplHTML = $this->getOption('tplHTML', $tpl);
+        $tplHTMLFirst = $this->getOption('tplHTMLFirst', $tplHTML);
+        $tplHTMLLast = $this->getOption('tplHTMLLast', $tplHTML);
+        $tplHTMLOdd = $this->getOption('tplHTMLOdd', $tplHTML);
         $tplWrapper = $this->getOption('tplWrapper');
         $wrapIfEmpty = $this->getOption('wrapIfEmpty', false);
         $toPlaceholder = $this->getOption('toPlaceholder');
@@ -117,12 +125,32 @@ class Snippet
                 $row = array_merge($scriptProperties, $row);
             }
 
-            if ($idx == 1) {
-                $tpl = $tplFirst;
-            } elseif ($idx == count($rows)) {
-                $tpl = $tplLast;
-            } elseif ($idx % 2 == 1) {
-                $tpl = $tplOdd;
+            if ($row['type'] == 'image' && $tplImage !== $tpl) {
+                $tpl = $tplImage;
+                if ($idx == 1) {
+                    $tpl = $tplImageFirst;
+                } elseif ($idx == count($rows)) {
+                    $tpl = $tplImageLast;
+                } elseif ($idx % 2 == 1) {
+                    $tpl = $tplImageOdd;
+                }
+            } elseif ($row['type'] == 'html' && $tplHTML !== $tpl) {
+                $tpl = $tplHTML;
+                if ($idx == 1) {
+                    $tpl = $tplHTMLFirst;
+                } elseif ($idx == count($rows)) {
+                    $tpl = $tplHTMLLast;
+                } elseif ($idx % 2 == 1) {
+                    $tpl = $tplHTMLOdd;
+                }
+            } else {
+                if ($idx == 1) {
+                    $tpl = $tplFirst;
+                } elseif ($idx == count($rows)) {
+                    $tpl = $tplLast;
+                } elseif ($idx % 2 == 1) {
+                    $tpl = $tplOdd;
+                }
             }
 
             $output[] = !empty($tpl)

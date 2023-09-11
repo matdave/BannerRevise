@@ -91,7 +91,7 @@ $xpdo_meta_map['brevClick']= array (
         array (
           'length' => '',
           'collation' => 'A',
-          'null' => false,
+          'null' => true,
         ),
       ),
     ),

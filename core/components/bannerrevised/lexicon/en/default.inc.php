@@ -32,6 +32,8 @@ $_lang['bannerrevised.ads.error.ns'] = 'Ad not set';
 $_lang['bannerrevised.ads.source'] = 'Media source';
 $_lang['bannerrevised.ads.start'] = 'Start of display';
 $_lang['bannerrevised.ads.end'] = 'End of display';
+$_lang['bannerrevised.ads.type'] = 'Type';
+$_lang['bannerrevised.ads.html'] = 'HTML';
 
 $_lang['bannerrevised.positions'] = 'Positions';
 $_lang['bannerrevised.positions.name'] = 'Name';

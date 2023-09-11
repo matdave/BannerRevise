@@ -3,10 +3,12 @@
 	<object class="Ad" table="ban_rev_ads">
 		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default=""/>
 		<field key="url" dbtype="varchar" precision="255" phptype="string" null="null" default=""/>
+		<field key="type" dbtype="varchar" precision="10" phptype="string" null="null" default=""/>
 		<field key="image" dbtype="varchar" precision="255" phptype="string" null="null" default=""/>
 		<field key="source" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="null" default="1"/>
 		<field key="active" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0"/>
 		<field key="description" dbtype="text" phptype="string" null="true" />
+		<field key="html" dbtype="text" phptype="string" null="true" />
 		<field key="start" dbtype="datetime" phptype="timestamp" null="true" />
 		<field key="end" dbtype="datetime" phptype="timestamp" null="true" />
 

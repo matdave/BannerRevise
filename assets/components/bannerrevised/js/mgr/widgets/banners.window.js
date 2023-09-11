@@ -18,110 +18,171 @@ bannerrev.window.Ad = function (config) {
                     'BannerRevised\\v3\\Processors\\Ads\\Update' :
                     'mgr/ads/update'
             }
-            ,fields: [{
-                xtype: 'hidden'
-                ,name: 'id'
-            },{
-                xtype: 'hidden'
-                ,name: 'image'
-                ,anchor: '99%'
-                ,id: 'image'
-            },{
-                xtype: 'textfield'
-                ,fieldLabel: _('bannerrevised.ads.name')
-                ,name: 'name'
-                ,anchor: '99%'
-                ,allowBlank: false
-            },{
-                items: [{
-                    layout: 'form'
+            ,fields: this.getItems(config)
+            ,keys: [{key: Ext.EventObject.ENTER,shift: true,fn:  function () {
+                    this.submit()},scope: this}]
+        }
+    );
+    bannerrev.window.Ad.superclass.constructor.call(this,config);
+};
+Ext.extend(bannerrev.window.Ad,MODx.Window, {
+    getItems: function (config) {
+        const items = [];
+        items.push(this.getGeneralFields(config));
+        if (config.record && config.record.type == 'image') {
+            items.push(this.getImageFields(config));
+        } else if (config.record && config.record.type == 'html') {
+            items.push(this.getHTMLFields(config));
+        } else {
+            items.push(this.getTypes(config));
+        }
+        items.push(this.getDisplayFields(config));
+        return items;
+    }
+    ,getTypes: function (config) {
+        return [{
+            xtype: 'modx-combo'
+            ,fieldLabel: _('bannerrevised.ads.type')
+            ,name: 'type'
+            ,hiddenName: 'type'
+            ,displayField: 'type'
+            ,valueField: 'type'
+            ,anchor: '99%'
+            ,mode: 'local'
+            ,store: new Ext.data.SimpleStore(
+                {
+                    fields: ['type']
+                    ,data: [
+                        ['image']
+                        ,['html']
+                    ]
+                }
+            )
+        }]
+    }
+    ,getHTMLFields: function (config) {
+        return [{
+            xtype: 'textarea'
+            ,fieldLabel: _('bannerrevised.ads.html')
+            ,name: 'html'
+            ,anchor: '99%'
+            ,height: 200
+            ,allowBlank: true
+            ,resize: true
+        }]
+    }
+    ,getImageFields: function (config) {
+        return [{
+            items: [{
+                layout: 'column'
+                ,border: false
+                ,items: [{
+                    columnWidth: .3
+                    ,border: false
+                    ,layout: 'form'
                     ,items: [{
-                        layout: 'column'
-                        ,border: false
-                        ,items: [{
-                            columnWidth: .8
-                            ,border: false
-                            ,layout: 'form'
-                            ,items: [{
-                                xtype: 'modx-combo-source'
-                                ,fieldLabel: _('bannerrevised.ads.source')
-                                ,id: 'modx-combo-source'
-                                ,name: 'source'
-                                ,anchor: '100%'
-                                ,value: config.record ? config.record.source : bannerrev.config['media_source']
-                            }]
-                        },{
-                            columnWidth: .2
-                            ,border: false
-                            ,layout: 'form'
-                            ,items: [{
-                                xtype: 'xcheckbox'
-                                ,fieldLabel: _('bannerrevised.ads.active')
-                                ,name: 'active'
-                                ,inputValue: 1
-                                ,checked: !config.update
-                            }]
-                        }]
+                        id: 'currimg'
+                        //,hideLabel: true
+                        ,style: 'margin-top: 20px;'
+                        ,xtype: 'image'
+                        ,cls: 'bannerrevised-thumb-window'
+                    }]
+                },{
+                    columnWidth: .7
+                    ,border: false
+                    ,layout: 'form'
+                    ,style: 'margin-right: 5px;'
+                    ,items: [{
+                        xtype: 'modx-combo-source'
+                        ,fieldLabel: _('bannerrevised.ads.source')
+                        ,id: 'modx-combo-source'
+                        ,name: 'source'
+                        ,anchor: '100%'
+                        ,value: config.record ? config.record.source : bannerrev.config['media_source']
+                    },{
+                        xtype: 'modx-combo-adbrowser'
+                        ,fieldLabel: config.update ? _('bannerrevised.ads.image.current') : _('bannerrevised.ads.image.new')
+                        ,name: 'newimage'
+                        ,hideFiles: true
+                        ,anchor: '99%'
+                        ,allowBlank: true
+                        ,openTo: config.openTo || '/'
+                        ,listeners: {
+                            select: {fn:function (data) {
+                                    Ext.getCmp('currimg').setSrc(data.url, Ext.getCmp('modx-combo-source').getValue());
+                                    Ext.getCmp('image').setValue(data.relativeUrl);
+                                }}
+                            ,change: {fn:function (data) {
+                                    var value = this.getValue();
+                                    Ext.getCmp('currimg').setSrc(value, Ext.getCmp('modx-combo-source').getValue());
+                                    Ext.getCmp('image').setValue(value);
+                                }}
+                        }
+                    },{
+                        xtype: 'textarea'
+                        ,fieldLabel: _('bannerrevised.ads.description')
+                        ,name: 'description'
+                        ,anchor: '99%'
+                        ,height: 75
+                        ,allowBlank: true
+                        ,resize: true
                     }]
                 }]
-            },{
-                items: [{
+            }]
+        }
+        ]
+    }
+    ,getGeneralFields: function (config) {
+        return [{
+            xtype: 'hidden'
+            ,name: 'id'
+        },{
+            xtype: 'hidden'
+            ,name: 'image'
+            ,anchor: '99%'
+            ,id: 'image'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('bannerrevised.ads.name')
+            ,name: 'name'
+            ,anchor: '99%'
+            ,allowBlank: false
+        },{
+            items: [{
+                layout: 'form'
+                ,items: [{
                     layout: 'column'
                     ,border: false
                     ,items: [{
-                        columnWidth: .3
+                        columnWidth: .8
                         ,border: false
                         ,layout: 'form'
                         ,items: [{
-                            id: 'currimg'
-                            //,hideLabel: true
-                            ,style: 'margin-top: 20px;'
-                            ,xtype: 'image'
-                            ,cls: 'bannerrevised-thumb-window'
-                        }]
-                    },{
-                        columnWidth: .7
-                        ,border: false
-                        ,layout: 'form'
-                        ,style: 'margin-right: 5px;'
-                        ,items: [{
-                            xtype: 'modx-combo-adbrowser'
-                            ,fieldLabel: config.update ? _('bannerrevised.ads.image.current') : _('bannerrevised.ads.image.new')
-                            ,name: 'newimage'
-                            ,hideFiles: true
-                            ,anchor: '99%'
-                            ,allowBlank: true
-                            ,openTo: config.openTo || '/'
-                            ,listeners: {
-                                select: {fn:function (data) {
-                                        Ext.getCmp('currimg').setSrc(data.url, Ext.getCmp('modx-combo-source').getValue());
-                                        Ext.getCmp('image').setValue(data.relativeUrl);
-                                    }}
-                                ,change: {fn:function (data) {
-                                        var value = this.getValue();
-                                        Ext.getCmp('currimg').setSrc(value, Ext.getCmp('modx-combo-source').getValue());
-                                        Ext.getCmp('image').setValue(value);
-                                    }}
-                            }
-                        },{
                             xtype: 'bannerrevised-filter-resources'
                             ,fieldLabel: _('bannerrevised.ads.url')
                             ,name: 'url'
                             ,description: _('bannerrevised.ads.url.description')
                             ,anchor: '99%'
                             ,allowBlank: true
-                        },{
-                            xtype: 'textarea'
-                            ,fieldLabel: _('bannerrevised.ads.description')
-                            ,name: 'description'
-                            ,anchor: '99%'
-                            ,height: 75
-                            ,allowBlank: true
-                            ,resize: true
+                        }]
+                    },{
+                        columnWidth: .2
+                        ,border: false
+                        ,layout: 'form'
+                        ,items: [{
+                            xtype: 'xcheckbox'
+                            ,fieldLabel: _('bannerrevised.ads.active')
+                            ,name: 'active'
+                            ,inputValue: 1
                         }]
                     }]
                 }]
-            },{
+            }]
+        }];
+    }
+    ,getDisplayFields: function (config) {
+        return [
+            {
                 items: [{
                     layout: 'form'
                     ,items: [{
@@ -167,12 +228,7 @@ bannerrev.window.Ad = function (config) {
                 ,fieldLabel: _('bannerrevised.positions')
                 ,name: 'positions'
             }
-            ]
-            ,keys: [{key: Ext.EventObject.ENTER,shift: true,fn:  function () {
-                    this.submit()},scope: this}]
-        }
-    );
-    bannerrev.window.Ad.superclass.constructor.call(this,config);
-};
-Ext.extend(bannerrev.window.Ad,MODx.Window);
+        ]
+    }
+});
 Ext.reg('bannerrevised-window-ad',bannerrev.window.Ad);

@@ -18,10 +18,12 @@ class Ad extends \BannerRevised\Model\Ad
         array (
             'name' => '',
             'url' => '',
+            'type' => '',
             'image' => '',
             'source' => 1,
             'active' => 0,
             'description' => NULL,
+            'html' => NULL,
             'start' => NULL,
             'end' => NULL,
         ),
@@ -39,6 +41,14 @@ class Ad extends \BannerRevised\Model\Ad
             array (
                 'dbtype' => 'varchar',
                 'precision' => '255',
+                'phptype' => 'string',
+                'null' => true,
+                'default' => '',
+            ),
+            'type' => 
+            array (
+                'dbtype' => 'varchar',
+                'precision' => '10',
                 'phptype' => 'string',
                 'null' => true,
                 'default' => '',
@@ -70,6 +80,12 @@ class Ad extends \BannerRevised\Model\Ad
                 'default' => 0,
             ),
             'description' => 
+            array (
+                'dbtype' => 'text',
+                'phptype' => 'string',
+                'null' => true,
+            ),
+            'html' => 
             array (
                 'dbtype' => 'text',
                 'phptype' => 'string',

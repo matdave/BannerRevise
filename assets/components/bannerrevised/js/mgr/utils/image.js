@@ -7,22 +7,19 @@ Ext.ux.Image = Ext.extend(
             ,cls: 'tng-managed-image'
             ,width: 166
             //,height: 100
+            ,'ext:qtip': (this.url) ? "<img src='/" + this.url.replace(MODx.config.base_path, '') + "' />" : ''
         }
         //  Add our custom processing to the onRender phase.
         //  We add a ‘load’ listener to our element.
         ,onRender: function () {
             Ext.ux.Image.superclass.onRender.apply(this, arguments);
             this.el.on('load', this.onLoad, this);
-            this.el.on('click', this.onClick, this);
             if(this.url) {
                 this.setSrc(this.url);
             }
         }
         ,onLoad: function () {
             this.fireEvent('load', this);
-        }
-        ,onClick: function () {
-            window.open(this.el.dom.getAttribute('data-link'));
         }
         ,setSrc: function (src, source, width, height) {
             if (src == '' || src == undefined) {
@@ -33,9 +30,9 @@ Ext.ux.Image = Ext.extend(
                 if (!source) {source = bannerrev.config['media_source'];}
                 if (!height) {height = 200;}
                 if (!width) {width = 166;}
-
+                console.log(this);
                 this.el.dom.src = MODx.config.connectors_url + 'system/phpthumb.php?src=' + src + '&w='+width+'&h='+height+'&f=jpg&q=90&HTTP_MODAUTH=' + MODx.siteId + '&far=1&wctx=mgr&source=' + source;
-                this.el.dom.setAttribute('data-link', '/' + src.replace(MODx.config.base_path, ''));
+                this.el.dom.setAttribute('ext:qtip', "<img src='/" + src.replace(MODx.config.base_path, '') + "' />");
 
                 Ext.getCmp('currimg').show();
             }

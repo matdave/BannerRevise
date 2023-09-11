@@ -14,10 +14,12 @@ $xpdo_meta_map['brevAd']= array (
   array (
     'name' => '',
     'url' => '',
+    'type' => '',
     'image' => '',
     'source' => 1,
     'active' => 0,
     'description' => NULL,
+    'html' => NULL,
     'start' => NULL,
     'end' => NULL,
   ),
@@ -35,6 +37,14 @@ $xpdo_meta_map['brevAd']= array (
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'type' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '10',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
@@ -66,6 +76,12 @@ $xpdo_meta_map['brevAd']= array (
       'default' => 0,
     ),
     'description' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => true,
+    ),
+    'html' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',

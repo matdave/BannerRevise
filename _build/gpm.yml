@@ -1,5 +1,5 @@
 name: BannerRevised
-version: 1.0.0-pl
+version: 1.1.0-pl
 lowCaseName: bannerrevised
 namespace: BannerRevised
 description: "BannerRevised - manage ads"
@@ -12,11 +12,15 @@ chunks:
     - name: brevAd
       file: chunk.brevad.tpl
       properties:
-          - name: bannerrevised_click
           - name: adposition
           - name: image
           - name: name
           - name: description
+    - name: brevHTMLAd
+      file: chunk.brevhtmlad.tpl
+      properties:
+          - name: adposition
+          - name: html
 plugins:
     - name: BannerRevisedClickout
       file: plugin.bannerrevisedclickout.php
@@ -29,9 +33,6 @@ snippets:
       properties:
           - name: positions
           - name: showLog
-            type: combo-boolean
-            value: "0"
-          - name: fastMode
             type: combo-boolean
             value: "0"
           - name: limit

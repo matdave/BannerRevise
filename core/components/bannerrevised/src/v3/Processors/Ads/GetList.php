@@ -3,6 +3,7 @@
 namespace BannerRevised\v3\Processors\Ads;
 
 use BannerRevised\Model\Ad;
+use BannerRevised\Model\AdPosition;
 use BannerRevised\Model\Click;
 use MODX\Revolution\modResource;
 use MODX\Revolution\Processors\Model\GetListProcessor;
@@ -27,7 +28,7 @@ class GetList extends GetListProcessor
             $q->select('ad');
             $q->where(array('position' => $position));
             if ($q->prepare() && $q->stmt->execute()) {
-                $ads = array_unique($q->stmt->fetchAll(PDO::FETCH_COLUMN));
+                $ads = array_unique($q->stmt->fetchAll(\PDO::FETCH_COLUMN));
             }
             if (!empty($ads)) {
                 if ($mode == 'exclude') {

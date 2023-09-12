@@ -8,6 +8,6 @@ use MODX\Revolution\Processors\Model\RemoveProcessor;
 class Remove extends RemoveProcessor
 {
     public $classKey = Ad::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $objectType = 'bannerrevised.ad';
 }

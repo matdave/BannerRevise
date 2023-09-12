@@ -2,6 +2,7 @@
 
 namespace BannerRevised\Model;
 
+use xPDO\Om\xPDOSimpleObject;
 use xPDO\xPDO;
 
 /**
@@ -14,6 +15,6 @@ use xPDO\xPDO;
  *
  * @package BannerRevised\Model
  */
-class Position extends \xPDO\Om\xPDOSimpleObject
+class Position extends xPDOSimpleObject
 {
 }

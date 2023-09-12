@@ -4,13 +4,14 @@ namespace BannerRevised\v3\Elements\Snippet;
 
 use BannerRevised\Model\Ad;
 use BannerRevised\Model\AdPosition;
+use modX;
 use MODX\Revolution\Sources\modMediaSource;
 
 class Snippet
 {
     /**
      * A reference to the modX object.
-     * @var \modX $modx
+     * @var modX $modx
      */
     public $modx = null;
 
@@ -57,10 +58,10 @@ class Snippet
         $date = date('Y-m-d H:i:s');
         $where = [
             [
-                'start'=> null,
+                'start' => null,
                 'OR:start:<=' => $date
             ],[
-                'end'=> null,
+                'end' => null,
                 'OR:end:>=' => $date
             ]
         ];
@@ -88,13 +89,13 @@ class Snippet
 
         $rows = $this->modx->getCollection(Ad::class, $c);
 
-        $output = array();
+        $output = [];
         $default_source = $this->bannerrevised->getOption(
             'media_source',
             $this->sp,
             $this->modx->getOption('default_media_source')
         );
-        $sources = array();
+        $sources = [];
         $idx = 0;
         foreach ($rows as $object) {
             $row = $object->toArray();
@@ -169,7 +170,7 @@ class Snippet
             $output = implode($outputSeparator, $output);
 
             if (!empty($tplWrapper) && (!empty($wrapIfEmpty) || !empty($output))) {
-                $output = $this->modx->getChunk($tplWrapper, array('output' => $output));
+                $output = $this->modx->getChunk($tplWrapper, ['output' => $output]);
             }
 
             if (!empty($toPlaceholder)) {

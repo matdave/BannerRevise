@@ -24,7 +24,7 @@ class BannerRevised
      * @param modX  &$modx  A reference to the modX object
      * @param array $config An array of configuration options
      */
-    public function __construct(modX &$modx, array $config = array())
+    public function __construct(modX &$modx, array $config = [])
     {
         $this->modx =& $modx;
 
@@ -40,7 +40,7 @@ class BannerRevised
         );
 
         $this->config = array_merge(
-            array(
+            [
                 'baseUrl' => $modx->getOption('base_url'),
                 'basePath' => $basePath,
                 'corePath' => $basePath,
@@ -59,7 +59,7 @@ class BannerRevised
                     $this->modx->getOption('default_media_source'),
                     true
                 )
-            ),
+            ],
             $config
         );
 
@@ -108,7 +108,7 @@ class BannerRevised
     public function refreshIdx($position = 0)
     {
         $q = $this->modx->newQuery(AdPosition::class);
-        $q ->where(array('position' => $position));
+        $q ->where(['position' => $position]);
         $q->sortby('idx', 'ASC');
 
         $res = $this->modx->getCollection(AdPosition::class, $q);

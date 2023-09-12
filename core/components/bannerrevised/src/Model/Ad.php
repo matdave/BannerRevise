@@ -3,6 +3,7 @@
 namespace BannerRevised\Model;
 
 use MODX\Revolution\Sources\modMediaSource;
+use xPDO\Om\xPDOSimpleObject;
 use xPDO\xPDO;
 
 /**
@@ -22,7 +23,7 @@ use xPDO\xPDO;
  *
  * @package BannerRevised\Model
  */
-class Ad extends \xPDO\Om\xPDOSimpleObject
+class Ad extends xPDOSimpleObject
 {
     public function getImageUrl($image = '')
     {

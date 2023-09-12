@@ -9,7 +9,7 @@ use MODX\Revolution\Processors\Model\CreateProcessor;
 class Create extends CreateProcessor
 {
     public $classKey = Ad::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $objectType = 'bannerrevised.ad';
 
     public function afterSave()
@@ -21,13 +21,13 @@ class Create extends CreateProcessor
             foreach ($positions as $position) {
                 $adPos = $this->modx->newObject(AdPosition::class);
                 //add settings
-                $idx = $this->modx->getCount(AdPosition::class, array('position' => $position));
+                $idx = $this->modx->getCount(AdPosition::class, ['position' => $position]);
                 $adPos->fromArray(
-                    array(
+                    [
                         'ad' => $this->object->get('id'),
                         'position' => $position,
                         'idx' => $idx
-                    )
+                    ]
                 );
                 //save position
                 $adPos->save();

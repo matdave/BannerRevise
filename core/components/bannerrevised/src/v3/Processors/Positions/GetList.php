@@ -11,7 +11,7 @@ use xPDO\Om\xPDOQuery;
 class GetList extends GetListProcessor
 {
     public $classKey = Position::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
     public $objectType = 'bannerrevised.position';
@@ -20,7 +20,7 @@ class GetList extends GetListProcessor
     {
         // Filter by search query
         if ($query = $this->getProperty('query')) {
-            $c->where(array('name:LIKE' => "%$query%"));
+            $c->where(['name:LIKE' => "%$query%"]);
         }
 
         return $c;
@@ -29,7 +29,7 @@ class GetList extends GetListProcessor
     public function prepareRow(xPDOObject $object)
     {
         $object = $object->toArray();
-        $object['clicks'] = $this->modx->getCount(Click::class, array('position' => $object['id']));
+        $object['clicks'] = $this->modx->getCount(Click::class, ['position' => $object['id']]);
         return $object;
     }
 }

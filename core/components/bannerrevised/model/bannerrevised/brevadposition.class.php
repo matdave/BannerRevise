@@ -5,9 +5,9 @@ class brevAdPosition extends xPDOSimpleObject
     function getPositionAds()
     {
         $position = $this->get('position');
-        $collection = $this->xpdo->getCollection('brevAdPosition', array('position' => $position));
+        $collection = $this->xpdo->getCollection('brevAdPosition', ['position' => $position]);
 
-        $arr = array();
+        $arr = [];
         foreach ($collection as $res) {
             $arr[] = $res;
         }

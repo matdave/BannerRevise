@@ -53,10 +53,10 @@ class Snippet
         $date = date('Y-m-d H:i:s');
         $where = [
             [
-                'start'=> null,
+                'start' => null,
                 'OR:start:<=' => $date
             ],[
-                'end'=> null,
+                'end' => null,
                 'OR:end:>=' => $date
             ]
         ];

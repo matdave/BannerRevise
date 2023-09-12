@@ -1,22 +1,24 @@
 <?php
+
 /**
  * @package bannerrevised
  */
-$xpdo_meta_map['brevPosition']= array (
+
+$xpdo_meta_map['brevPosition'] = array (
   'package' => 'bannerrevised',
   'version' => '0.1',
   'table' => 'ban_rev_positions',
-  'tableMeta' => 
+  'tableMeta' =>
   array (
     'engine' => 'InnoDB',
   ),
-  'fields' => 
+  'fields' =>
   array (
     'name' => '',
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'name' => 
+    'name' =>
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
@@ -25,17 +27,17 @@ $xpdo_meta_map['brevPosition']= array (
       'default' => '',
     ),
   ),
-  'indexes' => 
+  'indexes' =>
   array (
-    'name' => 
+    'name' =>
     array (
       'alias' => 'name',
       'primary' => false,
       'unique' => false,
       'type' => 'BTREE',
-      'columns' => 
+      'columns' =>
       array (
-        'name' => 
+        'name' =>
         array (
           'length' => '',
           'collation' => 'A',
@@ -44,9 +46,9 @@ $xpdo_meta_map['brevPosition']= array (
       ),
     ),
   ),
-  'composites' => 
+  'composites' =>
   array (
-    'Ads' => 
+    'Ads' =>
     array (
       'class' => 'brevAdPosition',
       'local' => 'id',
@@ -54,7 +56,7 @@ $xpdo_meta_map['brevPosition']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'Clicks' => 
+    'Clicks' =>
     array (
       'class' => 'brevClick',
       'local' => 'id',

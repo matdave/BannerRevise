@@ -24,9 +24,9 @@ class BannerRevisedHomeManagerController extends modExtraManagerController
                 'bannerrevised',
                 'BannerRevised',
                 $corePath . 'model/bannerrevised/',
-                array(
+                [
                     'core_path' => $corePath
-                )
+                ]
             );
         } else {
             $this->bannerrevised = $this->modx->getService('bannerrevised');
@@ -47,7 +47,7 @@ class BannerRevisedHomeManagerController extends modExtraManagerController
 
     public function getLanguageTopics()
     {
-        return array('bannerrevised:default');
+        return ['bannerrevised:default'];
     }
 
     public function checkPermissions()

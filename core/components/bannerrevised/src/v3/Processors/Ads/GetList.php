@@ -7,13 +7,14 @@ use BannerRevised\Model\AdPosition;
 use BannerRevised\Model\Click;
 use MODX\Revolution\modResource;
 use MODX\Revolution\Processors\Model\GetListProcessor;
+use PDO;
 use xPDO\Om\xPDOObject;
 use xPDO\Om\xPDOQuery;
 
 class GetList extends GetListProcessor
 {
     public $classKey = Ad::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
     public $objectType = 'bannerrevised.ad';
@@ -26,21 +27,21 @@ class GetList extends GetListProcessor
 
             $q = $this->modx->newQuery(AdPosition::class);
             $q->select('ad');
-            $q->where(array('position' => $position));
+            $q->where(['position' => $position]);
             if ($q->prepare() && $q->stmt->execute()) {
-                $ads = array_unique($q->stmt->fetchAll(\PDO::FETCH_COLUMN));
+                $ads = array_unique($q->stmt->fetchAll(PDO::FETCH_COLUMN));
             }
             if (!empty($ads)) {
                 if ($mode == 'exclude') {
-                    $c->where(array('id:NOT IN' => $ads));
+                    $c->where(['id:NOT IN' => $ads]);
                 } else {
-                    $c->where(array('id:IN' => $ads));
+                    $c->where(['id:IN' => $ads]);
                 }
             }
         }
         // Filter by search query
         if ($query = $this->getProperty('query')) {
-            $c->where(array('name:LIKE' => "%$query%", 'OR:description:LIKE' => "%$query%"));
+            $c->where(['name:LIKE' => "%$query%", 'OR:description:LIKE' => "%$query%", 'OR:html:LIKE' => "%$query%"]);
         }
 
         return $c;
@@ -52,7 +53,7 @@ class GetList extends GetListProcessor
          * @var brevAd $object
          */
         $row = $object->toArray();
-        $row['clicks'] = $this->modx->getCount(Click::class, array('ad' => $row['id']));
+        $row['clicks'] = $this->modx->getCount(Click::class, ['ad' => $row['id']]);
         $row['current_image'] = $object->getImageUrl();
 
         if (preg_match('/\[\[\~([0-9]{1,})\]\]$/', $row['url'], $matches)) {

@@ -1,179 +1,178 @@
 <?php
+
 namespace BannerRevised\Model\mysql;
 
 use xPDO\xPDO;
 
 class Ad extends \BannerRevised\Model\Ad
 {
-
-    public static $metaMap = array (
+    public static $metaMap = [
         'package' => 'BannerRevised\\Model\\',
         'version' => '3.0',
         'table' => 'ban_rev_ads',
-        'tableMeta' => 
-        array (
+        'tableMeta' =>
+        [
             'engine' => 'InnoDB',
-        ),
-        'fields' => 
-        array (
+        ],
+        'fields' =>
+        [
             'name' => '',
             'url' => '',
             'type' => '',
             'image' => '',
             'source' => 1,
             'active' => 0,
-            'description' => NULL,
-            'html' => NULL,
-            'start' => NULL,
-            'end' => NULL,
-        ),
-        'fieldMeta' => 
-        array (
-            'name' => 
-            array (
+            'description' => null,
+            'html' => null,
+            'start' => null,
+            'end' => null,
+        ],
+        'fieldMeta' =>
+        [
+            'name' =>
+            [
                 'dbtype' => 'varchar',
                 'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
                 'default' => '',
-            ),
-            'url' => 
-            array (
+            ],
+            'url' =>
+            [
                 'dbtype' => 'varchar',
                 'precision' => '255',
                 'phptype' => 'string',
                 'null' => true,
                 'default' => '',
-            ),
-            'type' => 
-            array (
+            ],
+            'type' =>
+            [
                 'dbtype' => 'varchar',
                 'precision' => '10',
                 'phptype' => 'string',
                 'null' => true,
                 'default' => '',
-            ),
-            'image' => 
-            array (
+            ],
+            'image' =>
+            [
                 'dbtype' => 'varchar',
                 'precision' => '255',
                 'phptype' => 'string',
                 'null' => true,
                 'default' => '',
-            ),
-            'source' => 
-            array (
+            ],
+            'source' =>
+            [
                 'dbtype' => 'integer',
                 'precision' => '10',
                 'phptype' => 'integer',
                 'attributes' => 'unsigned',
                 'null' => true,
                 'default' => 1,
-            ),
-            'active' => 
-            array (
+            ],
+            'active' =>
+            [
                 'dbtype' => 'tinyint',
                 'precision' => '1',
                 'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'default' => 0,
-            ),
-            'description' => 
-            array (
+            ],
+            'description' =>
+            [
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'null' => true,
-            ),
-            'html' => 
-            array (
+            ],
+            'html' =>
+            [
                 'dbtype' => 'text',
                 'phptype' => 'string',
                 'null' => true,
-            ),
-            'start' => 
-            array (
+            ],
+            'start' =>
+            [
                 'dbtype' => 'datetime',
                 'phptype' => 'timestamp',
                 'null' => true,
-            ),
-            'end' => 
-            array (
+            ],
+            'end' =>
+            [
                 'dbtype' => 'datetime',
                 'phptype' => 'timestamp',
                 'null' => true,
-            ),
-        ),
-        'indexes' => 
-        array (
-            'active' => 
-            array (
+            ],
+        ],
+        'indexes' =>
+        [
+            'active' =>
+            [
                 'alias' => 'active',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
-                array (
-                    'active' => 
-                    array (
+                'columns' =>
+                [
+                    'active' =>
+                    [
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
-                    ),
-                ),
-            ),
-            'start' => 
-            array (
+                    ],
+                ],
+            ],
+            'start' =>
+            [
                 'alias' => 'start',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
-                array (
-                    'start' => 
-                    array (
+                'columns' =>
+                [
+                    'start' =>
+                    [
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
-                    ),
-                ),
-            ),
-            'end' => 
-            array (
+                    ],
+                ],
+            ],
+            'end' =>
+            [
                 'alias' => 'end',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
-                array (
-                    'end' => 
-                    array (
+                'columns' =>
+                [
+                    'end' =>
+                    [
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
-                    ),
-                ),
-            ),
-        ),
-        'composites' => 
-        array (
-            'Positions' => 
-            array (
+                    ],
+                ],
+            ],
+        ],
+        'composites' =>
+        [
+            'Positions' =>
+            [
                 'class' => 'BannerRevised\\Model\\AdPosition',
                 'local' => 'id',
                 'foreign' => 'ad',
                 'cardinality' => 'many',
                 'owner' => 'local',
-            ),
-            'Clicks' => 
-            array (
+            ],
+            'Clicks' =>
+            [
                 'class' => 'BannerRevised\\Model\\Click',
                 'local' => 'id',
                 'foreign' => 'ad',
                 'cardinality' => 'many',
                 'owner' => 'local',
-            ),
-        ),
-    );
-
+            ],
+        ],
+    ];
 }

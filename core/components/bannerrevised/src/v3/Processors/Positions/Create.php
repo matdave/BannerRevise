@@ -8,6 +8,6 @@ use MODX\Revolution\Processors\Model\CreateProcessor;
 class Create extends CreateProcessor
 {
     public $classKey = Position::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $objectType = 'bannerrevised.position';
 }

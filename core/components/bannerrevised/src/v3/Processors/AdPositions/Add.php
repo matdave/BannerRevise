@@ -9,7 +9,7 @@ use MODX\Revolution\Processors\ModelProcessor;
 class Add extends ModelProcessor
 {
     public $classKey = AdPosition::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $objectType = 'bannerrevised.adposition';
     public $checkSavePermission = true;
 
@@ -37,16 +37,16 @@ class Add extends ModelProcessor
             return $this->modx->error->failure($this->modx->lexicon('bannerrevised.ads.error.ns'));
         }
 
-        $arr = array(
+        $arr = [
             'position' => $position
         , 'ad' => $ad
-        );
+        ];
 
         if ($this->modx->getCount(AdPosition::class, $arr)) {
             return $this->modx->error->failure($this->modx->lexicon('bannerrevised.adposition.error.ae'));
         }
 
-        $arr['idx'] = $this->modx->getCount(AdPosition::class, array('position' => $position));
+        $arr['idx'] = $this->modx->getCount(AdPosition::class, ['position' => $position]);
         $this->object->fromArray($arr);
         $this->object->save();
 

@@ -17,9 +17,9 @@ if ($modx->version['version'] < 3) {
         'bannerrevised',
         'BannerRevised',
         $corePath . 'model/bannerrevised/',
-        array(
+        [
             'core_path' => $corePath
-        )
+        ]
     );
     $v = 'v2';
 } else {

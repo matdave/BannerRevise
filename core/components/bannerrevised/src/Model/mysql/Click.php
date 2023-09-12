@@ -1,124 +1,123 @@
 <?php
+
 namespace BannerRevised\Model\mysql;
 
 use xPDO\xPDO;
 
 class Click extends \BannerRevised\Model\Click
 {
-
-    public static $metaMap = array (
+    public static $metaMap = [
         'package' => 'BannerRevised\\Model\\',
         'version' => '3.0',
         'table' => 'ban_rev_clicks',
-        'tableMeta' => 
-        array (
+        'tableMeta' =>
+        [
             'engine' => 'InnoDB',
-        ),
-        'fields' => 
-        array (
-            'ad' => NULL,
-            'position' => NULL,
-            'clickdate' => NULL,
-            'referrer' => NULL,
-            'ip' => NULL,
-        ),
-        'fieldMeta' => 
-        array (
-            'ad' => 
-            array (
+        ],
+        'fields' =>
+        [
+            'ad' => null,
+            'position' => null,
+            'clickdate' => null,
+            'referrer' => null,
+            'ip' => null,
+        ],
+        'fieldMeta' =>
+        [
+            'ad' =>
+            [
                 'dbtype' => 'integer',
                 'precision' => '10',
                 'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'index' => 'index',
-            ),
-            'position' => 
-            array (
+            ],
+            'position' =>
+            [
                 'dbtype' => 'integer',
                 'precision' => '10',
                 'attributes' => 'unsigned',
                 'phptype' => 'integer',
                 'null' => false,
                 'index' => 'index',
-            ),
-            'clickdate' => 
-            array (
+            ],
+            'clickdate' =>
+            [
                 'dbtype' => 'datetime',
                 'phptype' => 'datetime',
                 'null' => true,
-            ),
-            'referrer' => 
-            array (
+            ],
+            'referrer' =>
+            [
                 'dbtype' => 'varchar',
                 'precision' => '255',
                 'phptype' => 'string',
                 'null' => false,
-            ),
-            'ip' => 
-            array (
+            ],
+            'ip' =>
+            [
                 'dbtype' => 'varchar',
                 'precision' => '39',
                 'phptype' => 'string',
                 'null' => false,
-            ),
-        ),
-        'indexes' => 
-        array (
-            'clicks' => 
-            array (
+            ],
+        ],
+        'indexes' =>
+        [
+            'clicks' =>
+            [
                 'alias' => 'clicks',
                 'primary' => false,
                 'unique' => false,
                 'type' => 'BTREE',
-                'columns' => 
-                array (
-                    'ad' => 
-                    array (
+                'columns' =>
+                [
+                    'ad' =>
+                    [
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
-                    ),
-                    'position' => 
-                    array (
+                    ],
+                    'position' =>
+                    [
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
-                    ),
-                    'ip' => 
-                    array (
+                    ],
+                    'ip' =>
+                    [
                         'length' => '',
                         'collation' => 'A',
                         'null' => false,
-                    ),
-                    'clickdate' => 
-                    array (
+                    ],
+                    'clickdate' =>
+                    [
                         'length' => '',
                         'collation' => 'A',
                         'null' => true,
-                    ),
-                ),
-            ),
-        ),
-        'aggregates' => 
-        array (
-            'Ad' => 
-            array (
+                    ],
+                ],
+            ],
+        ],
+        'aggregates' =>
+        [
+            'Ad' =>
+            [
                 'class' => 'Ad',
                 'local' => 'ad',
                 'foreign' => 'id',
                 'cardinality' => 'one',
                 'owner' => 'foreign',
-            ),
-            'Position' => 
-            array (
+            ],
+            'Position' =>
+            [
                 'class' => 'BannerRevised\\Model\\Position',
                 'local' => 'position',
                 'foreign' => 'id',
                 'cardinality' => 'one',
                 'owner' => 'foreign',
-            ),
-        ),
-    );
-
+            ],
+        ],
+    ];
 }

@@ -10,7 +10,7 @@ use xPDO\Om\xPDOQuery;
 class GetList extends GetListProcessor
 {
     public $classKey = AdPosition::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $defaultSortField = 'idx';
     public $defaultSortDirection = 'ASC';
     public $objectType = 'bannerrevised.adposition';
@@ -27,7 +27,7 @@ class GetList extends GetListProcessor
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
         $position = $this->getProperty('position');
-        $c->where(array('position' => $position));
+        $c->where(['position' => $position]);
         return $c;
     }
 

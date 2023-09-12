@@ -10,7 +10,7 @@ use xPDO\Om\xPDOObject;
 class GetClicks extends GetListProcessor
 {
     public $classKey = Ad::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $defaultSortField = 'id';
     public $defaultSortDirection = 'ASC';
     public $objectType = 'bannerrevised.ad';
@@ -22,7 +22,7 @@ class GetClicks extends GetListProcessor
         $object = $object->toArray();
 
         $clickC = $this->modx->newQuery(Click::class);
-        $conditions = array();
+        $conditions = [];
         $conditions['ad'] = $object['id'];
 
         if (!empty($period)) {

@@ -9,19 +9,19 @@ use PDO;
 class GetReferrers extends GetListProcessor
 {
     public $classKey = Click::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $defaultSortField = 'clicks';
     public $defaultSortDirection = 'DESC';
     public $objectType = 'bannerrevised.ad';
 
     public function getData()
     {
-        $data = array();
+        $data = [];
         $limit = intval($this->getProperty('limit'));
         $start = intval($this->getProperty('start'));
         $period = $this->getProperty('period');
 
-        $conditions = array();
+        $conditions = [];
 
         if (!empty($period)) {
             if ($period == 'last month') {
@@ -57,7 +57,7 @@ class GetReferrers extends GetListProcessor
 
     public function iterate(array $data)
     {
-        $list = array();
+        $list = [];
         $this->currentIndex = 0;
         foreach ($data['results'] as $result) {
             $list[] = $result;

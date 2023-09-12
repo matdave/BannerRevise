@@ -9,7 +9,7 @@ use MODX\Revolution\Processors\ModelProcessor;
 class Disable extends ModelProcessor
 {
     public $classKey = Ad::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $objectType = 'bannerrevised.ad';
     public $checkSavePermission = true;
 
@@ -21,7 +21,7 @@ class Disable extends ModelProcessor
         }
         $this->object = $this->modx->getObject($this->classKey, $primaryKey);
         if (empty($this->object)) {
-            return $this->modx->lexicon($this->objectType . '_err_nfs', array($this->primaryKeyField => $primaryKey));
+            return $this->modx->lexicon($this->objectType . '_err_nfs', [$this->primaryKeyField => $primaryKey]);
         }
 
         if (

@@ -8,6 +8,6 @@ use MODX\Revolution\Processors\Model\UpdateProcessor;
 class Update extends UpdateProcessor
 {
     public $classKey = Position::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $objectType = 'bannerrevised.position';
 }

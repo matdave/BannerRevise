@@ -2,6 +2,7 @@
 
 namespace BannerRevised\Model;
 
+use xPDO\Om\xPDOSimpleObject;
 use xPDO\xPDO;
 
 /**
@@ -13,15 +14,14 @@ use xPDO\xPDO;
  *
  * @package BannerRevised\Model
  */
-class AdPosition extends \xPDO\Om\xPDOSimpleObject
+class AdPosition extends xPDOSimpleObject
 {
-
     public function getPositionAds()
     {
         $position = $this->get('position');
-        $collection = $this->xpdo->getCollection(AdPosition::class, array('position' => $position));
+        $collection = $this->xpdo->getCollection(AdPosition::class, ['position' => $position]);
 
-        $arr = array();
+        $arr = [];
         foreach ($collection as $res) {
             $arr[] = $res;
         }

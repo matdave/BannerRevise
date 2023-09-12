@@ -9,7 +9,7 @@ use MODX\Revolution\Processors\ModelProcessor;
 class Sort extends ModelProcessor
 {
     public $classKey = AdPosition::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $objectType = 'bannerrevised.adposition';
     public $checkSavePermission = true;
 
@@ -21,7 +21,7 @@ class Sort extends ModelProcessor
         }
         $this->object = $this->modx->getObject($this->classKey, $primaryKey);
         if (empty($this->object)) {
-            return $this->modx->lexicon($this->objectType . '_err_nfs', array($this->primaryKeyField => $primaryKey));
+            return $this->modx->lexicon($this->objectType . '_err_nfs', [$this->primaryKeyField => $primaryKey]);
         }
 
         if (
@@ -47,7 +47,7 @@ class Sort extends ModelProcessor
         }
 
         $positionads = $this->object->getPositionAds();
-        $empty = $ordered = $arr = array();
+        $empty = $ordered = $arr = [];
         foreach ($positionads as $v) {
             $id = $v->get('id');
             if ($id == $this->getProperty('id')) {
@@ -66,7 +66,7 @@ class Sort extends ModelProcessor
 
         if (empty($empty)) {
             $tmp = $ordered;
-            $ordered = array();
+            $ordered = [];
             foreach ($tmp as $k => $v) {
                 $ordered[$k - 1] = $v;
             }

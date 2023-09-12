@@ -12,12 +12,12 @@ class Get extends GetProcessor
      */
     public $object;
     public $classKey = Ad::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $objectType = 'bannerrevised.ad';
 
     public function beforeOutput()
     {
-        $adPositionList = array();
+        $adPositionList = [];
         $adPositions = $this->object->getMany('Positions');
         /**
          * @var brevAdPosition $adPosition

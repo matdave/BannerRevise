@@ -9,7 +9,7 @@ use MODX\Revolution\Processors\Model\UpdateProcessor;
 class Update extends UpdateProcessor
 {
     public $classKey = Ad::class;
-    public $languageTopics = array('bannerrevised:default');
+    public $languageTopics = ['bannerrevised:default'];
     public $objectType = 'bannerrevised.ad';
 
     public function beforeSet()
@@ -31,7 +31,7 @@ class Update extends UpdateProcessor
 
         if (is_array($positions)) {
             //remove unused current positions
-            $q = $this->modx->newQuery(AdPosition::class, array('position:NOT IN' => $positions, 'ad' => $ad));
+            $q = $this->modx->newQuery(AdPosition::class, ['position:NOT IN' => $positions, 'ad' => $ad]);
             $adpositions = $this->modx->getCollection(AdPosition::class, $q);
             /**
              * @var AdPosition $adposition
@@ -43,18 +43,18 @@ class Update extends UpdateProcessor
             }
             // add ad to new postion
             foreach ($positions as $position) {
-                $arr = array('ad' => $ad, 'position' => $position);
+                $arr = ['ad' => $ad, 'position' => $position];
 
                 if (!$adPos = $this->modx->getObject(AdPosition::class, $arr)) {
                     $adPos = $this->modx->newObject(AdPosition::class);
-                    $arr['idx'] = $this->modx->getCount(AdPosition::class, array('position' => $position));
+                    $arr['idx'] = $this->modx->getCount(AdPosition::class, ['position' => $position]);
                 }
                 $adPos->fromArray($arr);
                 $adPos->save();
             }
         } else {
             //no positions selected, so remove all of them
-            $this->modx->removeCollection(AdPosition::class, array('ad' => $ad));
+            $this->modx->removeCollection(AdPosition::class, ['ad' => $ad]);
         }
     }
 }

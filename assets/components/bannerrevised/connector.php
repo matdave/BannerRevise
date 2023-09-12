@@ -20,9 +20,9 @@ $modx->bannerrevised = $modx->getService(
     'bannerrevised',
     'BannerRevised',
     $corePath . 'model/bannerrevised/',
-    array(
+    [
         'core_path' => $corePath
-    )
+    ]
 );
 
 $modx->lexicon->load('bannerrevised:default');
@@ -30,8 +30,8 @@ $modx->lexicon->load('bannerrevised:default');
 /* handle request */
 $path = $modx->getOption('processorsPath', $modx->bannerrevised->config, $corePath . 'processors/');
 $modx->request->handleRequest(
-    array(
+    [
     'processors_path' => $path,
     'location' => '',
-    )
+    ]
 );

@@ -19,7 +19,7 @@ bannerrev.grid.Ads = function (config) {
             ,{header: _('bannerrevised.ads.active'),dataIndex: 'active',sortable: true, renderer: this.renderBoolean, width: 50}
             ,{header: _('bannerrevised.ads.type'),dataIndex: 'type',sortable: true, width: 75}
             ,{header: _('bannerrevised.ads.image'),dataIndex: 'current_image',sortable: false,renderer: {fn:function (img) {
-                return bannerrev.renderGridImage(img)}}, id: "byad-thumb", width: 100}
+                return bannerrev.renderGridImage(img)}}, id: "brevad-thumb", width: 100}
             ,{header: _('bannerrevised.ads.start'),dataIndex: 'start',sortable: true, width: 75}
             ,{header: _('bannerrevised.ads.end'),dataIndex: 'end',sortable: true, width: 75}
             //,{header: _('bannerrevised.ads.description'),dataIndex: 'description',sortable: false, hidden: true}

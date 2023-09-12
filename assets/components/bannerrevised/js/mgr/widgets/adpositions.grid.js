@@ -22,7 +22,7 @@ bannerrev.grid.AdPositions = function (config) {
                 {header: _('bannerrevised.adposition.idx'),dataIndex: 'idx',sortable: false, width: 25}
                 ,{header: _('bannerrevised.ads.name'),dataIndex: 'name',sortable: false}
                 ,{header: _('bannerrevised.ads.image'),dataIndex: 'image',sortable: false, width: 50, renderer: {fn:function (img) {
-                            return bannerrev.renderGridImage(img)}}, id: 'byad-thumb2'}
+                            return bannerrev.renderGridImage(img)}}, id: 'brevad-thumb2'}
             ]
             ,plugins: [new Ext.ux.dd.GridDragDropRowOrder(
                 {

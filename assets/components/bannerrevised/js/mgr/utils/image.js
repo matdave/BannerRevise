@@ -30,9 +30,13 @@ Ext.ux.Image = Ext.extend(
                 if (!source) {source = bannerrev.config['media_source'];}
                 if (!height) {height = 200;}
                 if (!width) {width = 166;}
-                console.log(this);
                 this.el.dom.src = MODx.config.connectors_url + 'system/phpthumb.php?src=' + src + '&w='+width+'&h='+height+'&f=jpg&q=90&HTTP_MODAUTH=' + MODx.siteId + '&far=1&wctx=mgr&source=' + source;
-                this.el.dom.setAttribute('ext:qtip', "<img src='/" + src.replace(MODx.config.base_path, '') + "' />");
+                const qtip = src.replace(MODx.config.base_path, '');
+                if (/^(http|https)/.test(qtip)) {
+                    this.el.dom.setAttribute('ext:qtip', "<img src='" + qtip + "' />");
+                } else {
+                    this.el.dom.setAttribute('ext:qtip', "<img src='/" + qtip + "' />");
+                }
 
                 Ext.getCmp('currimg').show();
             }
@@ -48,10 +52,10 @@ bannerrev.renderGridImage = function (img) {
             return img;
         }
         else if (/^(http|https)/.test(img)) {
-            return '<img src="'+img+'" alt="" />'
+            return '<img src="'+img+'" height="'+height+'" alt="" />'
         }
         else {
-            return '<img src="'+MODx.config.connectors_url+'system/phpthumb.php?&src='+img+'&wctx=web&h='+height+'&zc=0&source='+bannerrev.config['media_source']+'" alt="" />'
+            return '<img src="'+MODx.config.connectors_url+'system/phpthumb.php?&src='+img+'&wctx=web&h='+height+'&zc=0&source='+bannerrev.config['media_source']+'" height="'+height+'" alt="" />'
         }
     }
     else {

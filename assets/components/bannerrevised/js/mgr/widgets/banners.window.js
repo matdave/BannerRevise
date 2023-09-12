@@ -29,13 +29,31 @@ Ext.extend(bannerrev.window.Ad,MODx.Window, {
     getItems: function (config) {
         const items = [];
         items.push(this.getGeneralFields(config));
-        if (config.record && config.record.type == 'image') {
-            items.push(this.getImageFields(config));
-        } else if (config.record && config.record.type == 'html') {
-            items.push(this.getHTMLFields(config));
-        } else {
+        if ((config.record &&
+                (config.record.type === '' || config.record.type == null)
+        ) || !config.record) {
             items.push(this.getTypes(config));
         }
+        items.push(
+            {
+                items: [{
+                    xtype: 'container'
+                    ,layout: 'form'
+                    ,hidden: !(config.record && config.record.type === 'image')
+                    ,id: 'image-container'
+                    ,items: this.getImageFields(config)
+                }]
+            });
+        items.push(
+            {
+                items: [{
+                    xtype: 'container'
+                    ,layout: 'form'
+                    ,hidden: !(config.record && config.record.type === 'html')
+                    ,id: 'html-container'
+                    ,items: this.getHTMLFields(config)
+                }]
+            });
         items.push(this.getDisplayFields(config));
         return items;
     }
@@ -58,6 +76,26 @@ Ext.extend(bannerrev.window.Ad,MODx.Window, {
                     ]
                 }
             )
+            ,listeners: {
+                select: {
+                    fn: function (data) {
+                        const html = Ext.getCmp('html-container');
+                        const image = Ext.getCmp('image-container');
+                        if (data.value === 'image') {
+                            // clear all html fields
+                            this.clearNestedItems(this, html);
+                            html.hide();
+                            image.show();
+                        } else {
+                            // clear all image fields
+                            this.clearNestedItems(this, image);
+                            image.hide();
+                            html.show();
+                        }
+                    }
+                },
+                scope: this
+            }
         }]
     }
     ,getHTMLFields: function (config) {
@@ -98,7 +136,7 @@ Ext.extend(bannerrev.window.Ad,MODx.Window, {
                         ,id: 'modx-combo-source'
                         ,name: 'source'
                         ,anchor: '100%'
-                        ,value: config.record ? config.record.source : bannerrev.config['media_source']
+                        ,value: parseInt(config.record ? config.record.source : bannerrev.config['media_source'])
                     },{
                         xtype: 'modx-combo-adbrowser'
                         ,fieldLabel: config.update ? _('bannerrevised.ads.image.current') : _('bannerrevised.ads.image.new')
@@ -109,10 +147,12 @@ Ext.extend(bannerrev.window.Ad,MODx.Window, {
                         ,openTo: config.openTo || '/'
                         ,listeners: {
                             select: {fn:function (data) {
-                                    Ext.getCmp('currimg').setSrc(data.url, Ext.getCmp('modx-combo-source').getValue());
+                                    console.log(data);
+                                    Ext.getCmp('currimg').setSrc(data.fullRelativeUrl, Ext.getCmp('modx-combo-source').getValue());
                                     Ext.getCmp('image').setValue(data.relativeUrl);
                                 }}
                             ,change: {fn:function (data) {
+                                    console.log(data);
                                     var value = this.getValue();
                                     Ext.getCmp('currimg').setSrc(value, Ext.getCmp('modx-combo-source').getValue());
                                     Ext.getCmp('image').setValue(value);
@@ -229,6 +269,23 @@ Ext.extend(bannerrev.window.Ad,MODx.Window, {
                 ,name: 'positions'
             }
         ]
+    }
+    ,clearNestedItems: function (t, i) {
+        if (i === undefined) {
+            return;
+        }
+        if (i.items) {
+            i.items.each(function (item) {
+                if (item.setValue) {
+                    item.setValue('');
+                }
+                if (item.items) {
+                    t.clearNestedItems(t, item);
+                }
+            });
+        } else if (i.setValue) {
+            i.setValue('');
+        }
     }
 });
 Ext.reg('bannerrevised-window-ad',bannerrev.window.Ad);

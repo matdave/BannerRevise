@@ -1,4 +1,7 @@
 Changelog for BannerRevised.
+1.1.1-pl
+====================
+- UX fixes on the banner grid
 
 1.1.0-pl
 ====================

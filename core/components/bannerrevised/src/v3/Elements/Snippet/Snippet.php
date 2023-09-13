@@ -81,7 +81,7 @@ class Snippet
         }
 
         $c = $this->modx->newQuery(Ad::class);
-        $c->select('Ad.*, `Positions`.`idx`, `Positions`.`position` as `adposition`');
+        $c->select('Ad.*, `Positions`.`idx`, `Positions`.`id` as `adposition`');
         $c->where($where);
         $c->sortby($sortby, $sortdir);
         $c->limit($limit, $offset);

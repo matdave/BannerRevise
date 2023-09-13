@@ -76,7 +76,7 @@ class Snippet
         }
 
         $c = $this->modx->newQuery('brevAd');
-        $c->select('brevAd.*, `Positions`.`idx`, `Positions`.`position` as `adposition`');
+        $c->select('brevAd.*, `Positions`.`idx`, `Positions`.`id` as `adposition`');
         $c->where($where);
         $c->sortby($sortby, $sortdir);
         $c->limit($limit, $offset);

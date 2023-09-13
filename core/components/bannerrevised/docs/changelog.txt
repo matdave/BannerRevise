@@ -1,4 +1,10 @@
 Changelog for BannerRevised.
+1.1.2-pl
+====================
+- Fix snippet click tracking
+- Fix broken get list processor on MODX 3
+- Add "process" function to the Ad object class
+
 1.1.1-pl
 ====================
 - UX fixes on the banner grid

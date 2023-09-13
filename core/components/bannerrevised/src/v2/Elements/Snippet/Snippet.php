@@ -117,8 +117,8 @@ class Snippet
             }
 
             $row['idx'] = $idx++;
-            if (!empty($scriptProperties)) {
-                $row = array_merge($scriptProperties, $row);
+            if (!empty($this->sp)) {
+                $row = array_merge($this->sp, $row);
             }
 
             if ($row['type'] == 'image' && $tplImage !== $tpl) {

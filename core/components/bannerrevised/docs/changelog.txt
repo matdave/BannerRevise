@@ -1,4 +1,8 @@
 Changelog for BannerRevised.
+1.1.3-pl
+====================
+- Fix script properties not passing to the chunk
+
 1.1.2-pl
 ====================
 - Fix snippet click tracking

@@ -53,6 +53,6 @@ To display banners on your website, you can use the `[[BannerRevised]]` snippet.
 * `tplLast` - The chunk that will be used to display the last banner.
 * `tplOdd` - The chunk that will be used to display odd banners.
 * `tplImage`, `tplImageFirst`, `tplImageLast`, `tplImageOdd` - The chunk(s) that will be used to display image banners.
-* `tplHtml`, `tplHtmlFirst`, `tplHtmlLast`, `tplHtmlOdd` - The chunk(s) that will be used to display HTML banners.
+* `tplHTML`, `tplHTMLFirst`, `tplHTMLLast`, `tplHTMLOdd` - The chunk(s) that will be used to display HTML banners.
 * `tplWrapper` - The chunk that will be used to wrap the banners.
 * `wrapIfEmpty` - If set to `1`, the wrapper chunk will be displayed even if there are no banners to display. The default value is `0`.

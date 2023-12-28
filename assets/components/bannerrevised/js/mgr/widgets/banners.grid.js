@@ -14,7 +14,16 @@ bannerrev.grid.Ads = function (config) {
             ,columns: [
             {header: _('id'),dataIndex: 'id',sortable: true,width: 10}
             ,{header: _('bannerrevised.ads.name'),dataIndex: 'name',sortable: true, width: 75}
-            ,{header: _('bannerrevised.ads.url'),dataIndex: 'url',sortable: true, width: 100}
+            ,{
+                header: _('bannerrevised.ads.url'),
+                dataIndex: 'url',
+                sortable: true,
+                width: 100,
+                renderer: function (value, metaData, record, rowIndex, colIndex, store) {
+                    // render as html
+                    return value;
+                }
+            }
             ,{header: _('bannerrevised.ads.clicks'),dataIndex: 'clicks',sortable: false, width: 50}
             ,{header: _('bannerrevised.ads.active'),dataIndex: 'active',sortable: true, renderer: this.renderBoolean, width: 50}
             ,{header: _('bannerrevised.ads.type'),dataIndex: 'type',sortable: true, width: 75}

@@ -108,20 +108,7 @@ Ext.extend(
                         ,wctx: this.config.wctx || 'web'
                         ,openTo: this.config.openTo || ''
                         ,rootId: this.config.rootId || '/'
-                        ,hideSourceCombo: this.config.hideSourceCombo || false
-                        ,listeners: {
-                            'select': {fn: function (data) {
-                                    this.setValue(data.relativeUrl);
-                                    this.fireEvent('select',data);
-                                    var matched = data.thumb.match(/source=([0-9]{1,})$/);
-                                    if  (matched && matched[1]) {
-                                        source.setValue(matched[1]);
-                                    }
-                                    else {
-                                        source.setValue('');
-                                    }
-                                },scope:this}
-                        }
+                        ,hideSourceCombo: true
                     }
                 );
             }

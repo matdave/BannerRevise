@@ -65,7 +65,7 @@ class Snippet
                 'OR:end:>=' => $date
             ]
         ];
-        if ($showInactive) {
+        if (!$showInactive) {
             $where['active'] = 1;
         }
         if ($positions) {

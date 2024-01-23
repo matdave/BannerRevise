@@ -3,7 +3,7 @@
   "lowCaseName": "bannerrevised",
   "description": "BannerRevised - manage ads",
   "author": "matdave",
-  "version": "1.1.4-pl",
+  "version": "1.1.5-pl",
   "package": {
     "menus": [
       {

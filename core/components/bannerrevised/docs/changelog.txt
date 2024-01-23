@@ -1,4 +1,9 @@
 Changelog for BannerRevised.
+
+1.1.5-pl
+====================
+- Fixing image selector / media source selector
+
 1.1.4-pl
 ====================
 - Active Check Backwards

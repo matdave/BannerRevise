@@ -137,22 +137,32 @@ Ext.extend(bannerrev.window.Ad,MODx.Window, {
                         ,name: 'source'
                         ,anchor: '100%'
                         ,value: parseInt(config.record ? config.record.source : bannerrev.config['media_source'])
+                        ,listeners: {
+                            select: {fn:function (data) {
+                                    var imgCombo = Ext.getCmp('newimage');
+                                    imgCombo.setSrc(data.value)
+                                }}
+                            ,change: {fn:function (data) {
+                                    var imgCombo =Ext.getCmp('newimage');
+                                    imgCombo.setSrc(data.value)
+                                }}
+                        }
                     },{
                         xtype: 'modx-combo-adbrowser'
                         ,fieldLabel: config.update ? _('bannerrevised.ads.image.current') : _('bannerrevised.ads.image.new')
                         ,name: 'newimage'
+                        ,id: 'newimage'
                         ,hideFiles: true
                         ,anchor: '99%'
                         ,allowBlank: true
                         ,openTo: config.openTo || '/'
+                        ,source: parseInt(config.record ? config.record.source : bannerrev.config['media_source'])
                         ,listeners: {
                             select: {fn:function (data) {
-                                    console.log(data);
                                     Ext.getCmp('currimg').setSrc(data.fullRelativeUrl, Ext.getCmp('modx-combo-source').getValue());
                                     Ext.getCmp('image').setValue(data.relativeUrl);
                                 }}
                             ,change: {fn:function (data) {
-                                    console.log(data);
                                     var value = this.getValue();
                                     Ext.getCmp('currimg').setSrc(value, Ext.getCmp('modx-combo-source').getValue());
                                     Ext.getCmp('image').setValue(value);

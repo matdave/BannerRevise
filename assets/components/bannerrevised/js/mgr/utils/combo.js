@@ -78,6 +78,7 @@ MODx.combo.AdBrowser = function (config) {
             width: 300
             ,triggerAction: 'all'
             ,source: config.source || 1
+            ,hideSourceCombo: config.hideSourceCombo || true
         }
     );
     MODx.combo.AdBrowser.superclass.constructor.call(this,config);
@@ -87,38 +88,32 @@ MODx.combo.AdBrowser = function (config) {
 Ext.extend(
     MODx.combo.AdBrowser,MODx.combo.Browser,{
         browser: null
-
-        ,onTriggerClick : function (btn) {
-            if (this.disabled) {
-                return false;
-            }
-
-            var source = Ext.getCmp('modx-combo-source')
-            var source_id = source.getValue() || 1;
-            if (!this.browser[source]) {
-                this.browser[source] = MODx.load(
-                    {
-                        xtype: 'modx-browser'
-                        ,id: Ext.id()
-                        ,multiple: true
-                        ,source: source_id
-                        ,hideFiles: this.config.hideFiles || false
-                        ,rootVisible: this.config.rootVisible || false
-                        ,allowedFileTypes: this.config.allowedFileTypes || ''
-                        ,wctx: this.config.wctx || 'web'
-                        ,openTo: this.config.openTo || ''
-                        ,rootId: this.config.rootId || '/'
-                        ,hideSourceCombo: true
-                    }
-                );
-            }
-            this.browser[source].show(btn);
-
-            return true;
+        ,loadBrowser: function () {
+            this.browser = MODx.load({
+                xtype: 'modx-browser'
+                ,closeAction: 'close'
+                ,id: Ext.id()
+                ,multiple: true
+                ,source: this.config.source || MODx.config.default_media_source
+                ,hideFiles: this.config.hideFiles || false
+                ,rootVisible: this.config.rootVisible || false
+                ,allowedFileTypes: this.config.allowedFileTypes || ''
+                ,wctx: this.config.wctx || 'web'
+                ,openTo: this.config.openTo || ''
+                ,rootId: this.config.rootId || '/'
+                ,hideSourceCombo: this.config.hideSourceCombo || false
+                ,listeners: {
+                    'select': {fn: function(data) {
+                            this.setValue(data.relativeUrl);
+                            this.fireEvent('select',data);
+                        },scope:this}
+                }
+            });
         }
-
-        ,onDestroy: function () {
-            MODx.combo.AdBrowser.superclass.onDestroy.call(this);
+        ,setSrc: function (src) {
+            this.config.source = src;
+            this.loadBrowser();
+            this.setValue('');
         }
     }
 );

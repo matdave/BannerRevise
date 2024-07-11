@@ -6,7 +6,7 @@ class OnPageNotFound extends Event
 {
     public function run()
     {
-        $this->modx->log(1, 'BannerRevised: OnPageNotFound');
+        // $this->modx->log(1, 'BannerRevised: OnPageNotFound');
         $bannerrevised_click = $this->bannerrevised->getOption('click');
         if (preg_match('/' . $bannerrevised_click . '\/([0-9]+)/', $_SERVER['REQUEST_URI'], $matches)) {
             $id = $matches[1];
